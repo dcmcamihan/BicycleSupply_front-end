@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jolens Dashboard</title>
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+  />
+
+  <!-- Dashboard CSS -->
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <!-- Logo / Header -->
+    <div class="sidebar-header">
+      <div class="logo">
+        <img src="img/logo.png" alt="Jolens Logo" id="jolensLogo" />
+        <h2>Jolens</h2>
+      </div>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a href="#" class="active">
+            <i class="fa-solid fa-chart-line"></i>
+            <span class="link-text">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-sack-dollar"></i>
+            <span class="link-text">Sales</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-boxes-stacked"></i>
+            <span class="link-text">Inventory</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-users"></i>
+            <span class="link-text">Employees</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-cog"></i>
+            <span class="link-text">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <header class="topbar">
+      <div class="topbar-left">
+        <!-- Collapsible Toggle Button -->
+        <button class="toggle-btn" id="toggle-btn">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+        <h1>Welcome to Jolens Dashboard</h1>
+      </div>
+      <!-- Theme Toggle Button -->
+      <button class="theme-toggle" id="themeToggle">
+        <!-- Start with a sun icon for dark mode. Will switch to moon in light mode -->
+        <i class="fa-solid fa-sun"></i>
+      </button>
+    </header>
+
+    <section class="dashboard-section">
+      <div class="dashboard-card">
+        <h2>Dashboard Overview</h2>
+        <p>Place your main stats or charts here.</p>
+      </div>
+
+      <div class="dashboard-card">
+        <h2>Sales</h2>
+        <p>Sales overview or quick stats here.</p>
+      </div>
+
+      <div class="dashboard-card">
+        <h2>Inventory</h2>
+        <p>Inventory metrics, restock alerts, etc.</p>
+      </div>
+
+      <div class="dashboard-card">
+        <h2>Employees</h2>
+        <p>Manage employee data or schedules here.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="dashboard.js"></script>
+</body>
+</html>
