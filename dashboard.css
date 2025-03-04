@@ -158,6 +158,12 @@ body {
   background-color: #333;
 }
 
+/* Hide the sub-menu arrow icon when the sidebar is collapsed */
+.sidebar.collapsed li.collapsible .arrow {
+  display: none !important;
+}
+
+
 /* MAIN CONTENT */
 .main-content {
   flex: 1;
