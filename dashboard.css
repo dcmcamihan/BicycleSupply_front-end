@@ -132,6 +132,11 @@ body {
   transition: transform 0.3s ease;
   font-size: 0.9rem;
   margin-left: auto;
+  transform: rotate(-90deg);
+}
+
+.sidebar-nav li.collapsible.active > .collapsible-header .arrow {
+  transform: rotate(0deg);
 }
 
 .sidebar-nav li.collapsible .sub-menu {
