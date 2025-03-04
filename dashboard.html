@@ -38,28 +38,89 @@
             <span class="link-text">Dashboard</span>
           </a>
         </li>
-        <li>
-          <a href="#">
+
+        <!-- Collapsible Sales Menu -->
+        <li class="collapsible">
+          <a href="#" class="collapsible-header">
             <i class="fa-solid fa-sack-dollar"></i>
             <span class="link-text">Sales</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
           </a>
+          <ul class="sub-menu">
+            <li><a href="#">Sales Overview</a></li>
+            <li><a href="#">Sale Details</a></li>
+            <li><a href="#">Sale Payment Types</a></li>
+            <li><a href="#">Returns &amp; Exchange</a></li>
+          </ul>
         </li>
-        <li>
-          <a href="#">
+
+        <!-- Collapsible Inventory Menu -->
+        <li class="collapsible">
+          <a href="#" class="collapsible-header">
             <i class="fa-solid fa-boxes-stacked"></i>
             <span class="link-text">Inventory</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
           </a>
+          <ul class="sub-menu">
+            <li><a href="#">Product List</a></li>
+            <li><a href="#">Brands &amp; Categories</a></li>
+            <li><a href="#">Stockouts</a></li>
+          </ul>
         </li>
-        <li>
-          <a href="#">
+
+        <!-- Collapsible Employees Menu -->
+        <li class="collapsible">
+          <a href="#" class="collapsible-header">
             <i class="fa-solid fa-users"></i>
             <span class="link-text">Employees</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </a>
+          <ul class="sub-menu">
+            <li><a href="#">Employee List</a></li>
+            <li><a href="#">Attendance</a></li>
+            <li><a href="#">Role History</a></li>
+            <li><a href="#">Contacts</a></li>
+          </ul>
+        </li>
+
+        <!-- Collapsible Customers Menu -->
+        <li class="collapsible">
+          <a href="#" class="collapsible-header">
+            <i class="fa-solid fa-address-book"></i>
+            <span class="link-text">Customers</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </a>
+          <ul class="sub-menu">
+            <li><a href="#">Customer List</a></li>
+            <li><a href="#">Customer Contacts</a></li>
+          </ul>
+        </li>
+
+        <!-- Collapsible Suppliers Menu -->
+        <li class="collapsible">
+          <a href="#" class="collapsible-header">
+            <i class="fa-solid fa-truck"></i>
+            <span class="link-text">Suppliers</span>
+            <i class="fa-solid fa-chevron-down arrow"></i>
+          </a>
+          <ul class="sub-menu">
+            <li><a href="#">Supplier List</a></li>
+            <li><a href="#">Addresses</a></li>
+            <li><a href="#">Contacts</a></li>
+            <li><a href="#">Supply Orders</a></li>
+          </ul>
+        </li>
+
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-right-left"></i>
+            <span class="link-text">Return &amp; Exchange</span>
           </a>
         </li>
         <li>
           <a href="#">
-            <i class="fa-solid fa-cog"></i>
-            <span class="link-text">Settings</span>
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <span class="link-text">Logout</span>
           </a>
         </li>
       </ul>
@@ -78,7 +139,6 @@
       </div>
       <!-- Theme Toggle Button -->
       <button class="theme-toggle" id="themeToggle">
-        <!-- Start with a sun icon for dark mode. Will switch to moon in light mode -->
         <i class="fa-solid fa-sun"></i>
       </button>
     </header>
@@ -104,6 +164,11 @@
         <p>Manage employee data or schedules here.</p>
       </div>
     </section>
+
+    <!-- Floating Settings Button -->
+    <a href="settings.html" class="settings-fab" aria-label="Settings">
+      <i class="fa-solid fa-cog"></i>
+    </a>
   </div>
 
   <!-- JavaScript -->

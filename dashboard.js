@@ -31,3 +31,14 @@ themeToggle.addEventListener("click", () => {
     logoImg.src = "img/logo.png";
   }
 });
+
+// Collapsible Menu functionality
+const collapsibleHeaders = document.querySelectorAll('.sidebar-nav li.collapsible > .collapsible-header');
+
+collapsibleHeaders.forEach(header => {
+  header.addEventListener('click', (e) => {
+    // Toggle the parent li active class
+    const parentLi = header.parentElement;
+    parentLi.classList.toggle('active');
+  });
+});
