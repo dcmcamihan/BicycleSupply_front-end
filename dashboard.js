@@ -4,8 +4,18 @@ const sidebar = document.getElementById("sidebar");
 const mainContent = document.querySelector(".main-content");
 const logoImg = document.getElementById("jolensLogo");
 
+// 1. Select all collapsible items
+const collapsibleItems = document.querySelectorAll(".sidebar-nav li.collapsible");
+
 toggleBtn.addEventListener("click", () => {
   sidebar.classList.toggle("collapsed");
+
+  // 2. If the sidebar is now collapsed, remove "active" from each collapsible item
+  if (sidebar.classList.contains("collapsed")) {
+    collapsibleItems.forEach(item => {
+      item.classList.remove("active");
+    });
+  }
 });
 
 // Theme toggle
@@ -36,9 +46,14 @@ themeToggle.addEventListener("click", () => {
 const collapsibleHeaders = document.querySelectorAll('.sidebar-nav li.collapsible > .collapsible-header');
 
 collapsibleHeaders.forEach(header => {
-  header.addEventListener('click', (e) => {
-    // Toggle the parent li active class
+  header.addEventListener('click', () => {
+    // If the sidebar is collapsed, do not expand sub-menus
+    if (sidebar.classList.contains('collapsed')) {
+      return;
+    }
+    // Otherwise, toggle the parent li active class
     const parentLi = header.parentElement;
     parentLi.classList.toggle('active');
   });
 });
+
