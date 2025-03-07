@@ -120,3 +120,12 @@ function initProductToggles() {
     });
   });
 }
+
+function handleImageError(imgElement) {
+  // Prevent infinite loop if the fallback also fails
+  imgElement.onerror = null;
+  imgElement.style.display = 'none';
+  const avatarContainer = imgElement.parentElement;
+  // Show the default avatar element
+  avatarContainer.querySelector('.default-avatar').style.display = 'flex';
+}
