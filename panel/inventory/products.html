@@ -1,0 +1,172 @@
+<div class="product-page-container">
+  <!-- Add Product Form Section -->
+  <div class="add-product-side">
+    <h2>Add Product</h2>
+    <form id="addProductForm" class="add-product-form">
+      <div class="form-group">
+        <label for="productName">Product Name</label>
+        <input type="text" id="productName" placeholder="e.g. Deore XT Groupset" required>
+      </div>
+      <div class="form-group">
+        <label for="productBrand">Brand</label>
+        <input type="text" id="productBrand" placeholder="e.g. Shimano" required>
+      </div>
+      <div class="form-group">
+        <label for="productPrice">Price</label>
+        <input type="number" id="productPrice" placeholder="e.g. 350" required>
+      </div>
+      <div class="form-group">
+        <label for="productQuantity">Quantity In Stock</label>
+        <input type="number" id="productQuantity" placeholder="e.g. 25" required>
+      </div>
+      <div class="form-group">
+        <label for="productImageInput">Upload Image</label>
+        <input type="file" id="productImageInput" accept="image/*">
+      </div>
+      <button type="submit" class="btn-submit">Add Product</button>
+    </form>
+  </div>
+
+  <!-- Product List Section -->
+  <div class="products-container">
+    <h1>Product List</h1>
+    <table class="collapsible-table">
+      <thead>
+        <tr>
+          <th></th> <!-- arrow column -->
+          <th>Image</th>
+          <th>Product</th>
+          <th>Brand</th>
+          <th>Inventory</th>
+          <th>Price</th>
+          <th>Items</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example Row 1 -->
+        <tr class="parent-row">
+          <td class="toggle-cell">
+            <i class="fa-solid fa-chevron-right toggle-btn"></i>
+          </td>
+          <td>
+            <img src="panel/inventory/inventory-img/product1.png" alt="Product 1" class="product-image">
+          </td>
+          <td>Deore XT Groupset</td>
+          <td>Shimano</td>
+          <td><span class="status in-stock">In Stock</span></td>
+          <td>$350</td>
+          <td>25</td>
+        </tr>
+        <tr class="child-row">
+          <td colspan="7">
+            <div class="child-content">
+              <h3>History</h3>
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Total Price ($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-02-01</td>
+                    <td>2</td>
+                    <td>700</td>
+                  </tr>
+                  <tr>
+                    <td>2025-02-03</td>
+                    <td>1</td>
+                    <td>350</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+  
+        <!-- Example Row 2 -->
+        <tr class="parent-row">
+          <td class="toggle-cell">
+            <i class="fa-solid fa-chevron-right toggle-btn"></i>
+          </td>
+          <td>
+            <img src="panel/inventory/inventory-img/product2.png" alt="Product 2" class="product-image">
+          </td>
+          <td>Road Bike Helmet</td>
+          <td>Giro</td>
+          <td><span class="status out-stock">Out of Stock</span></td>
+          <td>$120</td>
+          <td>0</td>
+        </tr>
+        <tr class="child-row">
+          <td colspan="7">
+            <div class="child-content">
+              <h3>History</h3>
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Total Price ($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-01-18</td>
+                    <td>5</td>
+                    <td>600</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+  
+        <!-- Example Row 3 -->
+        <tr class="parent-row">
+          <td class="toggle-cell">
+            <i class="fa-solid fa-chevron-right toggle-btn"></i>
+          </td>
+          <td>
+            <img src="panel/inventory/inventory-img/product3.png" alt="Product 3" class="product-image">
+          </td>
+          <td>MTB Chain Lube</td>
+          <td>Stan13</td>
+          <td><span class="status in-stock">In Stock</span></td>
+          <td>$8</td>
+          <td>120</td>
+        </tr>
+        <tr class="child-row">
+          <td colspan="7">
+            <div class="child-content">
+              <h3>History</h3>
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Quantity</th>
+                    <th>Total Price ($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-03-01</td>
+                    <td>10</td>
+                    <td>80</td>
+                  </tr>
+                  <tr>
+                    <td>2025-03-02</td>
+                    <td>5</td>
+                    <td>40</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="products.js"></script>

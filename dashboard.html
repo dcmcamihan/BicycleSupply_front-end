@@ -15,8 +15,10 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
   />
 
-  <!-- Dashboard CSS -->
   <link rel="stylesheet" href="dashboard.css" />
+  <link rel="stylesheet" href="panel/inventory/products.css" />
+  <link rel="stylesheet" href="panel/employees/employees.css" />
+
 </head>
 <body>
   <!-- SIDEBAR -->
@@ -33,7 +35,7 @@
     <nav class="sidebar-nav">
       <ul>
         <li>
-          <a href="#" class="active">
+          <a href="#" class="nav-link active">
             <i class="fa-solid fa-chart-line"></i>
             <span class="link-text">Dashboard</span>
           </a>
@@ -62,7 +64,8 @@
             <i class="fa-solid fa-chevron-down arrow"></i>
           </a>
           <ul class="sub-menu">
-            <li><a href="#">Product List</a></li>
+            <!-- Updated link with data-page attribute -->
+            <li><a href="#" class="nav-link" data-page="panel/inventory/products.html">Product List</a></li>
             <li><a href="#">Brands &amp; Categories</a></li>
             <li><a href="#">Stockouts</a></li>
           </ul>
@@ -76,7 +79,7 @@
             <i class="fa-solid fa-chevron-down arrow"></i>
           </a>
           <ul class="sub-menu">
-            <li><a href="#">Employee List</a></li>
+            <li><a href="#" class="nav-link" data-page="panel/employees/employees.html">Employee List</a></li>
             <li><a href="#">Attendance</a></li>
             <li><a href="#">Role History</a></li>
             <li><a href="#">Contacts</a></li>
@@ -143,27 +146,28 @@
       </button>
     </header>
 
-    <section class="dashboard-section">
+    <!-- Default Dashboard Content -->
+    <section id="defaultDashboard" class="dashboard-section">
       <div class="dashboard-card">
         <h2>Dashboard Overview</h2>
         <p>Place your main stats or charts here.</p>
       </div>
-
       <div class="dashboard-card">
         <h2>Sales</h2>
         <p>Sales overview or quick stats here.</p>
       </div>
-
       <div class="dashboard-card">
         <h2>Inventory</h2>
         <p>Inventory metrics, restock alerts, etc.</p>
       </div>
-
       <div class="dashboard-card">
         <h2>Employees</h2>
         <p>Manage employee data or schedules here.</p>
       </div>
     </section>
+
+    <!-- Container for dynamically loaded content -->
+    <div id="mainContent" style="display: none;"></div>
 
     <!-- Floating Settings Button -->
     <a href="settings.html" class="settings-fab" aria-label="Settings">
@@ -173,5 +177,7 @@
 
   <!-- JavaScript -->
   <script src="dashboard.js"></script>
+  <script src="panel/employees/employees.js"></script>
+
 </body>
 </html>

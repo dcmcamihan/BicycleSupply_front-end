@@ -287,6 +287,10 @@ body {
   transform: scale(1.1);
 }
 
+body:not(.light-mode) .settings-fab {
+  box-shadow: 0 4px 8px rgba(171, 13, 7, 0.6);
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .sidebar {
@@ -318,7 +322,7 @@ body.light-mode .sidebar-nav a {
 }
 
 body.light-mode .sidebar-nav a:hover {
-  color: #000 !important;
+  color: white!important;
 }
 
 body.light-mode .topbar {
@@ -339,4 +343,10 @@ body.light-mode .sidebar-nav a.active {
 body.light-mode {
   background-color: #f4f4f4 !important;
   color: #333 !important;
+}
+
+.sidebar-nav {
+  flex: 1; 
+  overflow-y: auto;
+  padding-bottom: 20px; 
 }
