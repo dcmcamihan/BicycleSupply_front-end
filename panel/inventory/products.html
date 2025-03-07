@@ -40,6 +40,7 @@
           <th>Inventory</th>
           <th>Price</th>
           <th>Items</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -56,9 +57,12 @@
           <td><span class="status in-stock">In Stock</span></td>
           <td>$350</td>
           <td>25</td>
+          <td>
+            <i class="fa-solid fa-pen-to-square edit-product"></i>
+          </td>
         </tr>
         <tr class="child-row">
-          <td colspan="7">
+          <td colspan="8">
             <div class="child-content">
               <h3>History</h3>
               <table class="history-table">
@@ -85,7 +89,7 @@
             </div>
           </td>
         </tr>
-  
+
         <!-- Example Row 2 -->
         <tr class="parent-row">
           <td class="toggle-cell">
@@ -99,9 +103,12 @@
           <td><span class="status out-stock">Out of Stock</span></td>
           <td>$120</td>
           <td>0</td>
+          <td>
+            <i class="fa-solid fa-pen-to-square edit-product"></i>
+          </td>
         </tr>
         <tr class="child-row">
-          <td colspan="7">
+          <td colspan="8">
             <div class="child-content">
               <h3>History</h3>
               <table class="history-table">
@@ -123,7 +130,7 @@
             </div>
           </td>
         </tr>
-  
+
         <!-- Example Row 3 -->
         <tr class="parent-row">
           <td class="toggle-cell">
@@ -137,9 +144,12 @@
           <td><span class="status in-stock">In Stock</span></td>
           <td>$8</td>
           <td>120</td>
+          <td>
+            <i class="fa-solid fa-pen-to-square edit-product"></i>
+          </td>
         </tr>
         <tr class="child-row">
-          <td colspan="7">
+          <td colspan="8">
             <div class="child-content">
               <h3>History</h3>
               <table class="history-table">
@@ -169,4 +179,61 @@
       </tbody>
     </table>
   </div>
+</div>
+
+<!-- ==================== EDIT PRODUCT MODAL WITH TABS ==================== -->
+<div class="modal" id="editProductModal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2>Edit Product</h2>
+    <!-- Tab Buttons -->
+    <div class="edit-product-tabs">
+      <button class="edit-tab-button active" data-edit-tab="generalTab">General Info</button>
+      <button class="edit-tab-button" data-edit-tab="pricingTab">Pricing</button>
+      <button class="edit-tab-button" data-edit-tab="inventoryTab">Inventory</button>
+      <button class="edit-tab-button" data-edit-tab="imagesTab">Images</button>
+    </div>
+    <!-- Tab Contents -->
+    <div class="edit-tab-content active" id="generalTab">
+      <div class="form-group">
+        <label for="editProductName">Product Name</label>
+        <input type="text" id="editProductName" required>
+      </div>
+      <div class="form-group">
+        <label for="editProductBrand">Brand</label>
+        <input type="text" id="editProductBrand" required>
+      </div>
+    </div>
+    <div class="edit-tab-content" id="pricingTab">
+      <div class="form-group">
+        <label for="editProductPrice">Price</label>
+        <input type="number" id="editProductPrice" required>
+      </div>
+      <div class="form-group">
+        <label for="editDiscount">Discount % (optional)</label>
+        <input type="number" id="editDiscount" placeholder="e.g. 10 for 10% off">
+      </div>
+    </div>
+    <div class="edit-tab-content" id="inventoryTab">
+      <div class="form-group">
+        <label for="editProductStatus">Status</label>
+        <select id="editProductStatus">
+          <option value="In Stock">In Stock</option>
+          <option value="Out of Stock">Out of Stock</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="editProductQuantity">Quantity In Stock</label>
+        <input type="number" id="editProductQuantity" required>
+      </div>
+    </div>
+    <div class="edit-tab-content" id="imagesTab">
+      <div class="form-group">
+        <label for="editProductImage">Upload New Image</label>
+        <input type="file" id="editProductImage" accept="image/*">
+      </div>
+    </div>
+    <button type="button" class="btn-submit" id="saveEditProductBtn">Save Changes</button>
+  </div>
+</div>
   <script src="products.js"></script>
