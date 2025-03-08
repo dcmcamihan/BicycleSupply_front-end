@@ -108,13 +108,13 @@ function initProductToggles() {
     const productName = parentRow.querySelector("td:nth-child(3)").textContent;
     const productBrand = parentRow.querySelector("td:nth-child(4)").textContent;
     const productPrice = parentRow.querySelector("td:nth-child(6)").textContent;
-    const productQuantity = parentRow.querySelector("td:nth-child(7)").textContent;
+    const productCategory = parentRow.querySelector("td:nth-child(5)").textContent; // Added for category
   
     // Populate the edit modal with the extracted data
     document.getElementById("editProductName").value = productName;
     document.getElementById("editProductBrand").value = productBrand;
     document.getElementById("editProductPrice").value = productPrice.replace("$", "");
-    document.getElementById("editProductQuantity").value = productQuantity;
+    document.getElementById("editProductCategory").value = productCategory; // Set category
   
     // Display the edit modal
     editModal.style.display = "block";
@@ -127,6 +127,23 @@ function initProductToggles() {
       const parentRow = icon.closest(".parent-row");
       openEditModal(parentRow);
     });
+  });
+
+  // Close edit modal when clicking the close button
+  const closeEditModal = document.querySelector(".close-modal-edit");
+  if (closeEditModal) {
+    closeEditModal.addEventListener("click", () => {
+      const editModal = document.getElementById("editProductModal");
+      editModal.style.display = "none";
+    });
+  }
+
+  // Close edit modal when clicking outside the modal
+  window.addEventListener("click", (e) => {
+    const editModal = document.getElementById("editProductModal");
+    if (e.target === editModal) {
+      editModal.style.display = "none";
+    }
   });
 }
 
