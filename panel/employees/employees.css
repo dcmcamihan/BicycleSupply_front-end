@@ -91,3 +91,53 @@
 .view-icon:hover {
   color: #fff;
 }
+
+/* LIGHT MODE OVERRIDES */
+body.light-mode .employees-table {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+body.light-mode .employees-table thead {
+  background-color: #f7f7f7;
+}
+
+body.light-mode .employees-table th,
+body.light-mode .employees-table td {
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+body.light-mode .employees-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
+
+/* Light mode styling for status badges */
+body.light-mode .emp-status.active {
+  background-color: #2cae74;
+  color: #fff;
+}
+body.light-mode .emp-status.on-leave {
+  background-color: #f1c40f;
+  color: #333;
+}
+body.light-mode .emp-status.terminated {
+  background-color: #c0392b;
+  color: #fff;
+}
+
+/* Light Mode for Employee Photo */
+body.light-mode .employee-photo {
+  border: 3px solid transparent; 
+  background: linear-gradient(45deg, #ffdfdf, #e57373, #ffb74d);
+  background-clip: padding-box; 
+}
+
+/* Light Mode View Icon */
+body.light-mode .view-icon {
+  color: #555;
+}
+body.light-mode .view-icon:hover {
+  color: #ab0d07;
+}
