@@ -1,0 +1,87 @@
+/* General Styles */
+body {
+  font-family: 'Oswald', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+/* Month Buttons */
+.month-buttons {
+  text-align: center;
+  margin: 20px 0;
+}
+
+.month-buttons button {
+  background-color: #95bb72; /* Greenish color */
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  margin: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.month-buttons button:hover {
+  background-color: #75b0fe; /* Light blue hover */
+}
+
+/* Page Layout */
+.product-page-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+/* Sales Chart Section */
+.add-product-side {
+  width: 45%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-product-side h2 {
+  text-align: center;
+}
+
+#productBarChart {
+  width: 100%;
+  height: 300px;
+  display: block;
+}
+
+/* Product List Section */
+.products-container {
+  width: 50%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.collapsible-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.collapsible-table th, 
+.collapsible-table td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.collapsible-table th {
+  background-color: #f2f2f2;
+}
+
+/* Bar Chart Styling */
+canvas {
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px;
+}

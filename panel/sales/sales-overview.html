@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Brands & Categories | Jolens Bicycle Supply</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  
+  <!-- External CSS -->
+  <link rel="stylesheet" href="sales-overview.css" />
+</head>
+<body> 
+
+  <!-- Month Buttons -->
+  <div class="month-buttons">
+    <button>January</button>
+    <button>February</button>
+    <button>March</button>
+    <button>April</button>
+    <button>May</button>
+    <button>June</button>
+    <button>July</button>
+    <button>August</button>
+    <button>September</button>
+    <button>October</button>
+    <button>November</button>
+    <button>December</button>
+  </div>
+  
+  <div class="product-page-container">
+    <!-- Sales Chart Section -->
+    <div class="add-product-side">
+      <h2>Sales Chart</h2>
+      <canvas id="productBarChart"></canvas>
+    </div>
+  
+    <!-- Product List Section -->
+    <div class="products-container">
+      <table class="collapsible-table">
+        <thead>
+          <tr>
+            <th></th> <!-- arrow column -->
+            <th>Product</th>
+            <th>Brand</th>
+            <th>Cost</th>
+            <th>Price</th>
+            <th>Profit</th>
+            <th>Purchase Quantity</th>
+            <th>Date of Purchased</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td>Deore XT Groupset</td>
+            <td>Shimano</td>
+            <td>$350</td>
+            <td>$450</td>
+            <td>$100</td>
+            <td>10</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>Road Bike Helmet</td>
+            <td>Giro</td>
+            <td>$120</td>
+            <td>$200</td>
+            <td>$80</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>MTB Chain Lube</td>
+            <td>Stan13</td>
+            <td>$8</td>
+            <td>$80</td>
+            <td>$72</td>
+            <td>60</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="sales-overview.js"></script>
+</body>
+</html>

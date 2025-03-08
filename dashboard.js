@@ -215,15 +215,33 @@ function initProductToggles() {
         openEditModal(parentRow);
       });
   
-      // Add delete functionality
-      const deleteIcon = parentRow.querySelector(".delete-product");
+    // Add delete functionality
+    attachDeleteFunctionality(parentRow);
+  }
+
+  // Function to attach delete functionality to a row
+  function attachDeleteFunctionality(parentRow) {
+    const deleteIcon = parentRow.querySelector(".delete-product");
+    if (deleteIcon) {
       deleteIcon.addEventListener("click", () => {
         if (confirm("Are you sure you want to delete this product?")) {
+          const childRow = parentRow.nextElementSibling;
           parentRow.remove();
-          childRow.remove();
+          if (childRow && childRow.classList.contains("child-row")) {
+            childRow.remove();
+          }
         }
       });
     }
+  }
+
+  // Attach delete functionality to existing rows
+  const existingRows = document.querySelectorAll(".parent-row");
+  existingRows.forEach(row => {
+    attachDeleteFunctionality(row);
+  });
+    
+
 
   function openEditModal(parentRow) {
     // Ensure the edit modal exists in the DOM
