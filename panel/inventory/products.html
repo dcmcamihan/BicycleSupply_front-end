@@ -1,15 +1,34 @@
 <div class="products-container">
   <h1>Product List</h1>
+
+    <!-- Search & Filter Container -->
+    <div class="search-filter-container">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" id="searchInput" placeholder="Search products...">
+      </div>
+      <div class="filter-dropdown">
+        <select id="filterCriteria">
+          <option value="all">All</option>
+          <option value="brand">Brand</option>
+          <option value="name">Product Name</option>
+          <option value="price">Price</option>
+          <option value="out-stock">Out of Stock</option>
+        </select>
+      </div>
+    </div>
+
   <table class="collapsible-table">
     <thead>
       <tr>
         <th></th> <!-- arrow column -->
         <th>Image</th>
         <th>Product</th>
+        <th>Category</th>
         <th>Brand</th>
         <th>Inventory</th>
         <th>Price</th>
-        <th>Items</th>
+        <th>Quantity in Stock</th>
         <th>Action</th>
       </tr>
     </thead>
@@ -19,11 +38,11 @@
       <tr class="parent-row">
         <td class="toggle-cell">
           <i class="fa-solid fa-chevron-right toggle-btn"></i>
-        </td>
-        <td>
+        </td><td>
           <img src="panel/inventory/inventory-img/product1.png" alt="Product 1" class="product-image">
         </td>
         <td>Deore XT Groupset</td>
+        <td>Maintenance & Repair</td>
         <td>Shimano</td>
         <td><span class="status in-stock">In Stock</span></td>
         <td>$350</td>
@@ -70,6 +89,7 @@
           <img src="panel/inventory/inventory-img/product2.png" alt="Product 2" class="product-image">
         </td>
         <td>Road Bike Helmet</td>
+        <td>Cycling Apparel & Gear</td>
         <td>Giro</td>
         <td><span class="status out-stock">Out of Stock</span></td>
         <td>$120</td>
@@ -111,6 +131,7 @@
           <img src="panel/inventory/inventory-img/product3.png" alt="Product 3" class="product-image">
         </td>
         <td>MTB Chain Lube</td>
+        <td>Maintenance & Repair</td>
         <td>Stan13</td>
         <td><span class="status in-stock">In Stock</span></td>
         <td>$8</td>
@@ -150,11 +171,18 @@
     </tbody>
   </table>
   
-  <!-- Add Product Button -->
-  <div class="add-product-btn-container">
-    <button class="btn-add-product">Add Product</button>
+<!-- Controls Container -->
+<div class="table-controls">
+  <button class="btn-add-product">Add Product</button>
+  
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button id="prevPage" disabled>« Prev</button>
+    <span id="pageNumber">1</span>
+    <button id="nextPage">Next »</button>
   </div>
 </div>
+
 
 <!-- Add Product Modal -->
 <div class="modal" id="addProductModal">

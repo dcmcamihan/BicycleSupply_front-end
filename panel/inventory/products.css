@@ -527,3 +527,134 @@ body.light-mode .btn-submit {
 body.light-mode .btn-submit:hover {
   background-color: #900c06;
 }
+
+/* Controls Container for Add Button and Pagination */
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  padding: 0 10px;
+}
+
+.btn-add-product {
+  background-color: #ab0d07;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-family: "Oswald", sans-serif;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.btn-add-product:hover {
+  background-color: #900c06;
+}
+
+/* Pagination Controls */
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;   /* moves the pagination down */
+  margin-right: 50px; /* moves it a little to the left relative to its container */
+}
+
+.pagination button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s;
+}
+
+.pagination button:hover {
+  background-color: #555;
+}
+
+.pagination button:disabled {
+  background-color: #444;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #939294;
+}
+
+/* LIGHT MODE OVERRIDES for Controls */
+body.light-mode .pagination button {
+  background-color: #ddd;
+  color: #333;
+}
+
+body.light-mode .pagination button:hover {
+  background-color: #ccc;
+}
+
+body.light-mode .btn-add-product {
+  background-color: #ab0d07;
+  color: #fff;
+}
+
+/* Search & Filter Container */
+.search-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 0 10px;
+}
+
+/* Search Bar with Icon inside */
+.search-bar {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+.search-bar i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #ab0d07;
+  font-size: 1.2rem;
+  pointer-events: none;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px 12px 10px 36px; /* extra left padding for icon */
+  border: 1px solid #444;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.filter-dropdown {
+  flex: 0 0 200px;
+  margin-left: 20px;
+}
+
+.filter-dropdown select {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #444;
+  background-color: #333;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+/* LIGHT MODE OVERRIDES for Search & Filter */
+body.light-mode .search-bar input,
+body.light-mode .filter-dropdown select {
+  background-color: #f4f4f4;
+  color: #333;
+  border: 1px solid #ccc;
+}
