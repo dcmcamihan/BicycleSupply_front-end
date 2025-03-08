@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-  
   const toggleButtons = document.querySelectorAll('.collapsible-table .toggle-btn');
   toggleButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -10,116 +9,21 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   });
 
-  const addProductBtn = document.querySelector(".btn-add-product");
-  const addProductModal = document.getElementById("addProductModal");
-  const closeAddModal = document.querySelector(".close-modal-add");
-
-  if (addProductBtn) {
-    addProductBtn.addEventListener("click", () => {
-      addProductModal.style.display = "block";
-    });
-  }
-
-  if (closeAddModal) {
-    closeAddModal.addEventListener("click", () => {
-      addProductModal.style.display = "none";
-    });
-  }
-
-  window.addEventListener("click", (e) => {
-    if (e.target === addProductModal) {
-      addProductModal.style.display = "none";
-    }
-  });
-
-  const addProductForm = document.getElementById("addProductForm");
-  const productImageInput = document.getElementById("productImageInput");
-
-  if (addProductForm) {
-    addProductForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById("productName").value;
-      const brand = document.getElementById("productBrand").value;
-      const price = document.getElementById("productPrice").value;
-      const quantity = document.getElementById("productQuantity").value;
-
-      let imageSrc = "panel/inventory/inventory-img/generic-product.png";
-      if (productImageInput.files && productImageInput.files[0]) {
-        imageSrc = URL.createObjectURL(productImageInput.files[0]);
-      }
-
-      addNewProductRow(imageSrc, name, brand, "In Stock", price, quantity);
-
-      addProductForm.reset();
-      addProductModal.style.display = "none";
-    });
-  }
-
-  function addNewProductRow(imgSrc, name, brand, status, price, quantity) {
-    const tableBody = document.querySelector(".collapsible-table tbody");
-
-    const parentRow = document.createElement("tr");
-    parentRow.classList.add("parent-row");
-
-    parentRow.innerHTML = `
-      <td class="toggle-cell">
-        <i class="fa-solid fa-chevron-right toggle-btn"></i>
-      </td>
-      <td>
-        <img src="${imgSrc}" alt="${name}" class="product-image">
-      </td>
-      <td>${name}</td>
-      <td>${brand}</td>
-      <td><span class="status in-stock">${status}</span></td>
-      <td>$${price}</td>
-      <td>${quantity}</td>
-      <td>
-        <i class="fa-solid fa-pen-to-square edit-product"></i>
-      </td>
-    `;
-
-    const childRow = document.createElement("tr");
-    childRow.classList.add("child-row");
-    childRow.innerHTML = `
-      <td colspan="8">
-        <div class="child-content">
-          <h3>History</h3>
-          <p>No history yet for this new product.</p>
-        </div>
-      </td>
-    `;
-
-    tableBody.appendChild(parentRow);
-    tableBody.appendChild(childRow);
-
-    const toggleBtn = parentRow.querySelector(".toggle-btn");
-    toggleBtn.addEventListener("click", () => {
-      toggleBtn.classList.toggle('rotated');
-      childRow.style.display = (childRow.style.display === 'table-row') ? 'none' : 'table-row';
-    });
-
-    const editIcon = parentRow.querySelector(".edit-product");
-    editIcon.addEventListener("click", () => {
-      openEditModal(parentRow); 
-    });
-  }
-
   // Function to handle image upload in the edit modal
-const editProductImageInput = document.getElementById("editProductImage");
-const editProductImagePreview = document.getElementById("editProductImagePreview");
+  const editProductImageInput = document.getElementById("editProductImage");
+  const editProductImagePreview = document.getElementById("editProductImagePreview");
 
-if (editProductImageInput && editProductImagePreview) {
-  editProductImageInput.addEventListener("change", function (e) {
-    const file = e.target.files[0]; // Get the selected file
-    if (file) {
-      const reader = new FileReader(); // Create a FileReader to read the file
-      reader.onload = function (event) {
-        // Update the image preview with the uploaded image
-        editProductImagePreview.src = event.target.result;
-      };
-      reader.readAsDataURL(file); // Read the file as a data URL
-    }
-  });
-}
+  if (editProductImageInput && editProductImagePreview) {
+    editProductImageInput.addEventListener("change", function (e) {
+      const file = e.target.files[0]; // Get the selected file
+      if (file) {
+        const reader = new FileReader(); // Create a FileReader to read the file
+        reader.onload = function (event) {
+          // Update the image preview with the uploaded image
+          editProductImagePreview.src = event.target.result;
+        };
+        reader.readAsDataURL(file); // Read the file as a data URL
+      }
+    });
+  }
 });

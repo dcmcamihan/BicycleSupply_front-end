@@ -96,6 +96,135 @@ function initProductToggles() {
     });
   });
 
+    // Add Product Modal Logic
+    const addProductBtn = document.querySelector(".btn-add-product");
+    const addProductModal = document.getElementById("addProductModal");
+    const closeAddModal = document.querySelector(".close-modal-add");
+  
+    // Open the Add Product Modal
+    if (addProductBtn) {
+      addProductBtn.addEventListener("click", () => {
+        addProductModal.style.display = "block";
+      });
+    }
+  
+    // Close the Add Product Modal when clicking the close button
+    if (closeAddModal) {
+      closeAddModal.addEventListener("click", () => {
+        addProductModal.style.display = "none";
+      });
+    }
+  
+    // Close the Add Product Modal when clicking outside the modal
+    window.addEventListener("click", (e) => {
+      if (e.target === addProductModal) {
+        addProductModal.style.display = "none";
+      }
+    });
+  
+    // Function to handle image upload in the add modal
+    const addProductImageInput = document.getElementById("addProductImage");
+    const addProductImagePreview = document.getElementById("addProductImagePreview");
+  
+    if (addProductImageInput && addProductImagePreview) {
+      addProductImageInput.addEventListener("change", function (e) {
+        const file = e.target.files[0]; // Get the selected file
+        if (file) {
+          const reader = new FileReader(); // Create a FileReader to read the file
+          reader.onload = function (event) {
+            // Update the image preview with the uploaded image
+            addProductImagePreview.src = event.target.result;
+          };
+          reader.readAsDataURL(file); // Read the file as a data URL
+        }
+      });
+    }
+  
+    // Handle form submission for adding a product
+    const addProductForm = document.getElementById("addProductForm");
+    if (addProductForm) {
+      addProductForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+  
+        const name = document.getElementById("addProductName").value;
+        const brand = document.getElementById("addProductBrand").value;
+        const category = document.getElementById("addProductCategory").value;
+        const price = document.getElementById("addProductPrice").value;
+  
+        let imageSrc = "panel/inventory/inventory-img/generic-product.png";
+        if (addProductImageInput.files && addProductImageInput.files[0]) {
+          imageSrc = URL.createObjectURL(addProductImageInput.files[0]);
+        }
+  
+        addNewProductRow(imageSrc, name, brand, category, price);
+  
+        addProductForm.reset();
+        addProductModal.style.display = "none";
+      });
+    }
+  
+    // Function to add a new product row
+    function addNewProductRow(imgSrc, name, brand, category, price) {
+      const tableBody = document.querySelector(".collapsible-table tbody");
+  
+      const parentRow = document.createElement("tr");
+      parentRow.classList.add("parent-row");
+  
+      parentRow.innerHTML = `
+        <td class="toggle-cell">
+          <i class="fa-solid fa-chevron-right toggle-btn"></i>
+        </td>
+        <td>
+          <img src="${imgSrc}" alt="${name}" class="product-image">
+        </td>
+        <td>${name}</td>
+        <td>${category}</td>
+        <td>${brand}</td>
+        <td><span class="status in-stock">In Stock</span></td>
+        <td>$${price}</td>
+        <td>
+          <i class="fa-solid fa-pen-to-square edit-product"></i>
+          <i class="fa-solid fa-trash delete-product"></i>
+        </td>
+      `;
+  
+      const childRow = document.createElement("tr");
+      childRow.classList.add("child-row");
+      childRow.innerHTML = `
+        <td colspan="8">
+          <div class="child-content">
+            <h3>History</h3>
+            <p>No history yet for this new product.</p>
+          </div>
+        </td>
+      `;
+  
+      tableBody.appendChild(parentRow);
+      tableBody.appendChild(childRow);
+  
+      // Add toggle functionality
+      const toggleBtn = parentRow.querySelector(".toggle-btn");
+      toggleBtn.addEventListener("click", () => {
+        toggleBtn.classList.toggle("rotated");
+        childRow.style.display = childRow.style.display === "table-row" ? "none" : "table-row";
+      });
+  
+      // Add edit functionality
+      const editIcon = parentRow.querySelector(".edit-product");
+      editIcon.addEventListener("click", () => {
+        openEditModal(parentRow);
+      });
+  
+      // Add delete functionality
+      const deleteIcon = parentRow.querySelector(".delete-product");
+      deleteIcon.addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete this product?")) {
+          parentRow.remove();
+          childRow.remove();
+        }
+      });
+    }
+
   function openEditModal(parentRow) {
     // Ensure the edit modal exists in the DOM
     const editModal = document.getElementById("editProductModal");
