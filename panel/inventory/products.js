@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
   const addProductBtn = document.querySelector(".btn-add-product");
   const addProductModal = document.getElementById("addProductModal");
-  const closeAddModal = document.querySelector(".close-modal-add"); // Updated selector
+  const closeAddModal = document.querySelector(".close-modal-add");
 
   if (addProductBtn) {
     addProductBtn.addEventListener("click", () => {

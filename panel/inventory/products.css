@@ -413,7 +413,7 @@ body.light-mode #saveEditProductBtn:hover {
 /* Add Product Button Container */
 .add-product-btn-container {
   margin: 20px 0;
-  text-align: right;
+  text-align: left;
 }
 
 .btn-add-product {
