@@ -96,6 +96,30 @@ function initProductToggles() {
     });
   });
 
+  function openEditModal(parentRow) {
+    // Ensure the edit modal exists in the DOM
+    const editModal = document.getElementById("editProductModal");
+    if (!editModal) {
+      console.error("Edit modal not found.");
+      return;
+    }
+  
+    // Extract product data from the row
+    const productName = parentRow.querySelector("td:nth-child(3)").textContent;
+    const productBrand = parentRow.querySelector("td:nth-child(4)").textContent;
+    const productPrice = parentRow.querySelector("td:nth-child(6)").textContent;
+    const productQuantity = parentRow.querySelector("td:nth-child(7)").textContent;
+  
+    // Populate the edit modal with the extracted data
+    document.getElementById("editProductName").value = productName;
+    document.getElementById("editProductBrand").value = productBrand;
+    document.getElementById("editProductPrice").value = productPrice.replace("$", "");
+    document.getElementById("editProductQuantity").value = productQuantity;
+  
+    // Display the edit modal
+    editModal.style.display = "block";
+  }
+
   // Attach "edit" icon logic
   const editIcons = document.querySelectorAll(".edit-product");
   editIcons.forEach(icon => {

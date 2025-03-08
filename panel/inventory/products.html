@@ -1,6 +1,165 @@
-<div class="product-page-container">
-  <!-- Add Product Form Section -->
-  <div class="add-product-side">
+<div class="products-container">
+  <h1>Product List</h1>
+  <table class="collapsible-table">
+    <thead>
+      <tr>
+        <th></th> <!-- arrow column -->
+        <th>Image</th>
+        <th>Product</th>
+        <th>Brand</th>
+        <th>Inventory</th>
+        <th>Price</th>
+        <th>Items</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+      <!-- Example Row 1 -->
+      <tr class="parent-row">
+        <td class="toggle-cell">
+          <i class="fa-solid fa-chevron-right toggle-btn"></i>
+        </td>
+        <td>
+          <img src="panel/inventory/inventory-img/product1.png" alt="Product 1" class="product-image">
+        </td>
+        <td>Deore XT Groupset</td>
+        <td>Shimano</td>
+        <td><span class="status in-stock">In Stock</span></td>
+        <td>$350</td>
+        <td>25</td>
+        <td>
+          <i class="fa-solid fa-pen-to-square edit-product"></i>
+        </td>
+      </tr>
+      <tr class="child-row">
+        <td colspan="8">
+          <div class="child-content">
+            <h3>History</h3>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Quantity</th>
+                  <th>Total Price ($)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-02-01</td>
+                  <td>2</td>
+                  <td>700</td>
+                </tr>
+                <tr>
+                  <td>2025-02-03</td>
+                  <td>1</td>
+                  <td>350</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Example Row 2 -->
+      <tr class="parent-row">
+        <td class="toggle-cell">
+          <i class="fa-solid fa-chevron-right toggle-btn"></i>
+        </td>
+        <td>
+          <img src="panel/inventory/inventory-img/product2.png" alt="Product 2" class="product-image">
+        </td>
+        <td>Road Bike Helmet</td>
+        <td>Giro</td>
+        <td><span class="status out-stock">Out of Stock</span></td>
+        <td>$120</td>
+        <td>0</td>
+        <td>
+          <i class="fa-solid fa-pen-to-square edit-product"></i>
+        </td>
+      </tr>
+      <tr class="child-row">
+        <td colspan="8">
+          <div class="child-content">
+            <h3>History</h3>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Quantity</th>
+                  <th>Total Price ($)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-01-18</td>
+                  <td>5</td>
+                  <td>600</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+
+      <!-- Example Row 3 -->
+      <tr class="parent-row">
+        <td class="toggle-cell">
+          <i class="fa-solid fa-chevron-right toggle-btn"></i>
+        </td>
+        <td>
+          <img src="panel/inventory/inventory-img/product3.png" alt="Product 3" class="product-image">
+        </td>
+        <td>MTB Chain Lube</td>
+        <td>Stan13</td>
+        <td><span class="status in-stock">In Stock</span></td>
+        <td>$8</td>
+        <td>120</td>
+        <td>
+          <i class="fa-solid fa-pen-to-square edit-product"></i>
+        </td>
+      </tr>
+      <tr class="child-row">
+        <td colspan="8">
+          <div class="child-content">
+            <h3>History</h3>
+            <table class="history-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Quantity</th>
+                  <th>Total Price ($)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>2025-03-01</td>
+                  <td>10</td>
+                  <td>80</td>
+                </tr>
+                <tr>
+                  <td>2025-03-02</td>
+                  <td>5</td>
+                  <td>40</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Add Product Button -->
+  <div class="add-product-btn-container">
+    <button class="btn-add-product">Add Product</button>
+  </div>
+</div>
+
+<!-- Add Product Modal -->
+<div class="modal" id="addProductModal">
+  <div class="modal-content">
+    <span class="close-modal-add">&times;</span>
     <h2>Add Product</h2>
     <form id="addProductForm" class="add-product-form">
       <div class="form-group">
@@ -26,175 +185,14 @@
       <button type="submit" class="btn-submit">Add Product</button>
     </form>
   </div>
-
-  <!-- Product List Section -->
-  <div class="products-container">
-    <h1>Product List</h1>
-    <table class="collapsible-table">
-      <thead>
-        <tr>
-          <th></th> <!-- arrow column -->
-          <th>Image</th>
-          <th>Product</th>
-          <th>Brand</th>
-          <th>Inventory</th>
-          <th>Price</th>
-          <th>Items</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Example Row 1 -->
-        <tr class="parent-row">
-          <td class="toggle-cell">
-            <i class="fa-solid fa-chevron-right toggle-btn"></i>
-          </td>
-          <td>
-            <img src="panel/inventory/inventory-img/product1.png" alt="Product 1" class="product-image">
-          </td>
-          <td>Deore XT Groupset</td>
-          <td>Shimano</td>
-          <td><span class="status in-stock">In Stock</span></td>
-          <td>$350</td>
-          <td>25</td>
-          <td>
-            <i class="fa-solid fa-pen-to-square edit-product"></i>
-          </td>
-        </tr>
-        <tr class="child-row">
-          <td colspan="8">
-            <div class="child-content">
-              <h3>History</h3>
-              <table class="history-table">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Quantity</th>
-                    <th>Total Price ($)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>2025-02-01</td>
-                    <td>2</td>
-                    <td>700</td>
-                  </tr>
-                  <tr>
-                    <td>2025-02-03</td>
-                    <td>1</td>
-                    <td>350</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-
-        <!-- Example Row 2 -->
-        <tr class="parent-row">
-          <td class="toggle-cell">
-            <i class="fa-solid fa-chevron-right toggle-btn"></i>
-          </td>
-          <td>
-            <img src="panel/inventory/inventory-img/product2.png" alt="Product 2" class="product-image">
-          </td>
-          <td>Road Bike Helmet</td>
-          <td>Giro</td>
-          <td><span class="status out-stock">Out of Stock</span></td>
-          <td>$120</td>
-          <td>0</td>
-          <td>
-            <i class="fa-solid fa-pen-to-square edit-product"></i>
-          </td>
-        </tr>
-        <tr class="child-row">
-          <td colspan="8">
-            <div class="child-content">
-              <h3>History</h3>
-              <table class="history-table">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Quantity</th>
-                    <th>Total Price ($)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>2025-01-18</td>
-                    <td>5</td>
-                    <td>600</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-
-        <!-- Example Row 3 -->
-        <tr class="parent-row">
-          <td class="toggle-cell">
-            <i class="fa-solid fa-chevron-right toggle-btn"></i>
-          </td>
-          <td>
-            <img src="panel/inventory/inventory-img/product3.png" alt="Product 3" class="product-image">
-          </td>
-          <td>MTB Chain Lube</td>
-          <td>Stan13</td>
-          <td><span class="status in-stock">In Stock</span></td>
-          <td>$8</td>
-          <td>120</td>
-          <td>
-            <i class="fa-solid fa-pen-to-square edit-product"></i>
-          </td>
-        </tr>
-        <tr class="child-row">
-          <td colspan="8">
-            <div class="child-content">
-              <h3>History</h3>
-              <table class="history-table">
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Quantity</th>
-                    <th>Total Price ($)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>2025-03-01</td>
-                    <td>10</td>
-                    <td>80</td>
-                  </tr>
-                  <tr>
-                    <td>2025-03-02</td>
-                    <td>5</td>
-                    <td>40</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 </div>
 
-<!-- ==================== EDIT PRODUCT MODAL WITH TABS ==================== -->
+<!-- Edit Product Modal -->
 <div class="modal" id="editProductModal">
   <div class="modal-content">
-    <span class="close-modal">&times;</span>
+    <span class="close-modal-edit">&times;</span>
     <h2>Edit Product</h2>
-    <!-- Tab Buttons -->
-    <div class="edit-product-tabs">
-      <button class="edit-tab-button active" data-edit-tab="generalTab">General Info</button>
-      <button class="edit-tab-button" data-edit-tab="pricingTab">Pricing</button>
-      <button class="edit-tab-button" data-edit-tab="inventoryTab">Inventory</button>
-      <button class="edit-tab-button" data-edit-tab="imagesTab">Images</button>
-    </div>
-    <!-- Tab Contents -->
-    <div class="edit-tab-content active" id="generalTab">
+    <form id="editProductForm">
       <div class="form-group">
         <label for="editProductName">Product Name</label>
         <input type="text" id="editProductName" required>
@@ -203,37 +201,21 @@
         <label for="editProductBrand">Brand</label>
         <input type="text" id="editProductBrand" required>
       </div>
-    </div>
-    <div class="edit-tab-content" id="pricingTab">
       <div class="form-group">
         <label for="editProductPrice">Price</label>
         <input type="number" id="editProductPrice" required>
       </div>
       <div class="form-group">
-        <label for="editDiscount">Discount % (optional)</label>
-        <input type="number" id="editDiscount" placeholder="e.g. 10 for 10% off">
-      </div>
-    </div>
-    <div class="edit-tab-content" id="inventoryTab">
-      <div class="form-group">
-        <label for="editProductStatus">Status</label>
-        <select id="editProductStatus">
-          <option value="In Stock">In Stock</option>
-          <option value="Out of Stock">Out of Stock</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="editProductQuantity">Quantity In Stock</label>
+        <label for="editProductQuantity">Quantity</label>
         <input type="number" id="editProductQuantity" required>
       </div>
-    </div>
-    <div class="edit-tab-content" id="imagesTab">
       <div class="form-group">
-        <label for="editProductImage">Upload New Image</label>
+        <label for="editProductImage">Upload Image</label>
         <input type="file" id="editProductImage" accept="image/*">
       </div>
-    </div>
-    <button type="button" class="btn-submit" id="saveEditProductBtn">Save Changes</button>
+      <button type="submit" class="btn-submit">Save Changes</button>
+    </form>
   </div>
 </div>
-  <script src="products.js"></script>
+
+<script src="products.js"></script>
