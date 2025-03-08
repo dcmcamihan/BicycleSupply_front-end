@@ -68,11 +68,42 @@ function loadPage(pageUrl) {
       mainContentDiv.innerHTML = html;
       defaultDashboard.style.display = "none";
       mainContentDiv.style.display = "block";
-      // Re-run the code to attach collapsible table logic
+      // Re-run the code to attach collapsible table logic and edit icon logic
       initProductToggles();
-      initEmployeeEditIcons();
     })
     .catch(err => console.error("Failed to load page:", err));
+}
+
+// A function to attach toggle listeners to newly loaded content
+function initProductToggles() {
+  const toggleButtons = document.querySelectorAll('.collapsible-table .toggle-btn');
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Rotate the arrow
+      btn.classList.toggle('rotated');
+      
+      // The closest parent row (parent-row)
+      const parentRow = btn.closest('.parent-row');
+      // The next sibling row is the child row
+      const childRow = parentRow.nextElementSibling;
+
+      // Toggle display
+      if (childRow.style.display === 'table-row') {
+        childRow.style.display = 'none';
+      } else {
+        childRow.style.display = 'table-row';
+      }
+    });
+  });
+
+  // Attach "edit" icon logic
+  const editIcons = document.querySelectorAll(".edit-product");
+  editIcons.forEach(icon => {
+    icon.addEventListener("click", () => {
+      const parentRow = icon.closest(".parent-row");
+      openEditModal(parentRow);
+    });
+  });
 }
 
 // On click, remove .active from all, then add to the clicked link
@@ -97,29 +128,6 @@ navLinks.forEach(link => {
     }
   });
 });
-
-// A function to attach toggle listeners to newly loaded content
-function initProductToggles() {
-  const toggleButtons = document.querySelectorAll('.collapsible-table .toggle-btn');
-  toggleButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Rotate the arrow
-      btn.classList.toggle('rotated');
-      
-      // The closest parent row (parent-row)
-      const parentRow = btn.closest('.parent-row');
-      // The next sibling row is the child row
-      const childRow = parentRow.nextElementSibling;
-
-      // Toggle display
-      if (childRow.style.display === 'table-row') {
-        childRow.style.display = 'none';
-      } else {
-        childRow.style.display = 'table-row';
-      }
-    });
-  });
-}
 
 function handleImageError(imgElement) {
   // Prevent infinite loop if the fallback also fails

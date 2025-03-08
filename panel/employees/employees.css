@@ -56,7 +56,10 @@
     height: 60px;
     object-fit: cover;
     border-radius: 50%;
-    border: 2px solid #444;
+    border: 3px solid transparent; 
+    background: linear-gradient(45deg, #e1b6b3, #a74357, #a85c30); 
+    background-clip: padding-box; 
+    padding: 2px; 
   }
   
   /* Status styling */
@@ -186,7 +189,10 @@
   }
   
   body.light-mode .employee-photo {
-    border: 2px solid #ccc;
+    border: 3px solid transparent; 
+    background: linear-gradient(45deg, #e1b6b3, #a74357, #a85c30); 
+    background-clip: padding-box; 
+    padding: 2px; 
   }
   
   body.light-mode .modal-content {
@@ -204,6 +210,5 @@
     color: #333;
     border: 1px solid #ccc;
   }
-  
-  /* More status classes remain the same color in light mode or define if you want them different. */
+
   
