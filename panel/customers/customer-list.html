@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer List</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS file -->
+    <style>
+        .order-history {
+            display: none;
+            background: #f9f9f9;
+            padding: 10px;
+            border-left: 4px solid #95bb72;
+        }
+        .dropdown-btn {
+            cursor: pointer;
+            background: none;
+            border: none;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: left;
+            width: 100%;
+        }
+        .arrow {
+            font-size: 14px;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+
+  <div class="products-container">
+    <h1>Customer List</h1>
+    <table class="collapsible-table">
+      <thead>
+        <tr>
+          <th></th> <!-- arrow column -->
+          <th>Name</th>
+          <th>Customer ID</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Example Row 1 -->
+        <tr class="parent-row">
+          <td class="toggle-cell">
+            <i class="fa-solid fa-chevron-right toggle-btn"></i>
+          </td>
+          <td>Niko</td>
+          <td>101</td>
+        </tr>
+        <tr class="child-row">
+          <td colspan="8">
+            <div class="child-content">
+              <h3>History</h3>
+              <table class="history-table">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Product Name</th>
+                    <th>Product Brand</th>
+                    <th>Quantity</th>
+                    <th>Total Price ($)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>2025-02-01</td>
+                    <td>brake</td>
+                    <td>shimano</td>
+                    <td>2</td>
+                    <td>100</td>
+                  </tr>
+                  <tr>
+                    <td>2025-02-03</td>
+                    <td>wheels</td>
+                    <td>trek</td>
+                    <td>2</td>
+                    <td>5000</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </td>
+        </tr>
+</body>
+</html>
