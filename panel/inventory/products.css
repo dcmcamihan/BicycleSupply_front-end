@@ -220,13 +220,25 @@ body {
   color: #fff;
 }
 
-.close-modal {
+.close-modal-edit {
   position: absolute;
   top: 15px;
   right: 15px;
   cursor: pointer;
-  font-size: 1.4rem;
+  font-size: 1.5rem; 
   color: #fff;
+  background-color: #ab0d07; 
+  width: 30px; 
+  height: 30px; 
+  border-radius: 50%; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease; 
+}
+
+.close-modal-edit:hover {
+  background-color: #900c06; /* Darker red on hover */
 }
 
 .modal-content h2 {
