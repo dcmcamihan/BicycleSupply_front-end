@@ -31,6 +31,7 @@
             <option value="empstatus">Employee Status</option>
             <option value="name">Name</option>
             <option value="hours">Hours Worked</option>
+            <option value="date">Date</option>
           </select>
         </div>
         <!-- Search Bar -->
@@ -45,24 +46,176 @@
       </div>
 
       <!-- Attendance Table -->
-      <table class="attendance-table">
+      <table class="attendance-table collapsible-table">
         <thead>
           <tr>
+            <th class="toggle-cell"></th>
             <th>Employee ID</th>
             <th>Name</th>
-            <th>Employee Status</th>
             <th>Attendance Status</th>
-            <th>Time In</th>
-            <th>Time Out</th>
-            <th>Hours Worked</th>
-            <th>Remarks</th>
+            <th>Date</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody id="attendanceTbody">
-          <!-- Rows will be populated via JS -->
+      
+          <!-- Parent Row 1 -->
+          <tr class="parent-row">
+            <td class="toggle-cell">
+              <i class="fa-solid fa-chevron-right toggle-btn"></i>
+            </td>
+            <td>E001</td>
+            <td>Savannah Nguyen</td>
+            <td>
+              <span class="att-status" style="color: #2cae74;">Present</span>
+            </td>
+            <td>2025-03-10</td>
+            <td>
+              <button class="edit-btn">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <!-- Child Row 1 (nested table) -->
+          <tr class="child-row">
+            <td colspan="6">
+              <div class="child-content">
+                <h3>Details</h3>
+                <table class="child-inner-table">
+                  <thead>
+                    <tr>
+                      <th>Employee Status</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                      <th>Hours Worked</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="emp-status" style="background-color: #2ecc71;">Active</span>
+                      </td>
+                      <td>08:00</td>
+                      <td>17:00</td>
+                      <td>9.0</td>
+                      <td>On time</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+      
+          <!-- Parent Row 2 -->
+          <tr class="parent-row">
+            <td class="toggle-cell">
+              <i class="fa-solid fa-chevron-right toggle-btn"></i>
+            </td>
+            <td>E002</td>
+            <td>Michael Johnson</td>
+            <td>
+              <span class="att-status" style="color: #c0392b;">Leave of Absence</span>
+            </td>
+            <td>2025-03-10</td>
+            <td>
+              <button class="edit-btn">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <!-- Child Row 2 (nested table) -->
+          <tr class="child-row">
+            <td colspan="6">
+              <div class="child-content">
+                <h3>Details</h3>
+                <table class="child-inner-table">
+                  <thead>
+                    <tr>
+                      <th>Employee Status</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                      <th>Hours Worked</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="emp-status" style="background-color: #3498db;">Probationary</span>
+                      </td>
+                      <td>--:--</td>
+                      <td>--:--</td>
+                      <td>0.0</td>
+                      <td>Family emergency</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+      
+          <!-- Parent Row 3 -->
+          <tr class="parent-row">
+            <td class="toggle-cell">
+              <i class="fa-solid fa-chevron-right toggle-btn"></i>
+            </td>
+            <td>E003</td>
+            <td>Erin Stone</td>
+            <td>
+              <span class="att-status" style="color: #f39c12;">Suspended</span>
+            </td>
+            <td>2025-03-10</td>
+            <td>
+              <button class="edit-btn">
+                <i class="fa-solid fa-pen-to-square"></i>
+              </button>
+              <button class="delete-btn">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <!-- Child Row 3 (nested table) -->
+          <tr class="child-row">
+            <td colspan="6">
+              <div class="child-content">
+                <h3>Details</h3>
+                <table class="child-inner-table">
+                  <thead>
+                    <tr>
+                      <th>Employee Status</th>
+                      <th>Time In</th>
+                      <th>Time Out</th>
+                      <th>Hourse Worked</th>
+                      <th>Remarks</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <span class="emp-status" style="background-color: #9b59b6;">Part-Time</span>
+                      </td>
+                      <td>10:00</td>
+                      <td>18:00</td>
+                      <td>8.00</td>
+                      <td>Late multiple times</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </td>
+          </tr>
+      
         </tbody>
       </table>
+      
+      
 
       <!-- Table Controls: Pagination -->
       <div class="table-controls">

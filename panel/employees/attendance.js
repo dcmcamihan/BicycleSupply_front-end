@@ -1,21 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // ======= Data & Pagination =======
-    let attendanceData = [
-      {
-        empID: "E001",
-        firstName: "Savannah",
-        middleName: "",
-        lastName: "Nguyen",
-        employeeStatus: "Active",
-        attendanceStatus: "Present",
-        date: "2025-03-10",
-        timeIn: "08:00",
-        timeOut: "17:00",
-        remarks: "On time",
-      },
-      // Additional records can be added here...
-    ];
-  
+  const toggleButtons = document.querySelectorAll('.toggle-btn');
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', function () {
+      this.classList.toggle('rotated');
+      const parentRow = this.closest('.parent-row');
+      const childRow = parentRow.nextElementSibling;
+      if (childRow && childRow.classList.contains('child-row')) {
+        childRow.style.display = (childRow.style.display === 'table-row') ? 'none' : 'table-row';
+      }
+    });
+  });
+
     let currentPage = 1;
     const itemsPerPage = 10;
   

@@ -148,6 +148,11 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.4);
   }
+
+  .calendar-container iframe {
+    width: 100%; /* Make iframe responsive */
+    height: 250px; /* Reduced height */
+}
   
   .summary-boxes {
     display: grid;
@@ -295,3 +300,88 @@
   
   body.light-mode .btn-add-attendance { background-color: #ab0d07; color: #fff; }
   body.light-mode .btn-add-attendance:hover { background-color: #900c06; }
+
+/* Collapsible Table Styles */
+.collapsible-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #2a2a2a;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+}
+
+.toggle-cell {
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.toggle-btn {
+  transition: transform 0.3s ease;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.parent-row:hover {
+  background-color: #3a3a3a;
+}
+
+.child-row {
+  display: none;
+  background-color: #1f1f1f;
+}
+
+.child-content {
+  padding: 15px;
+  background-color: #1f1f1f; /* match your child-row color */
+  border-top: 1px solid #444;
+}
+
+.child-content h3 {
+  margin-bottom: 10px;
+  font-size: 1rem;
+  color: #ab0d07;
+}
+
+.child-inner-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.child-inner-table thead {
+  background-color: #333;
+}
+
+.child-inner-table th,
+.child-inner-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid #444;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #fff;
+}
+
+.child-inner-table tbody tr:hover {
+  background-color: #3a3a3a;
+}
+
+/* Light Mode Overrides for the nested table */
+body.light-mode .child-content {
+  background-color: #fafafa;
+  border-top: 1px solid #eee;
+}
+
+body.light-mode .child-inner-table thead {
+  background-color: #f7f7f7;
+}
+
+body.light-mode .child-inner-table th,
+body.light-mode .child-inner-table td {
+  border-bottom: 1px solid #ddd;
+  color: #333;
+}
+
+body.light-mode .child-inner-table tbody tr:hover {
+  background-color: #f0f0f0;
+}
