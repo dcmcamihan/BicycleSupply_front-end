@@ -2,7 +2,7 @@
   <h1>Product List</h1>
 
     <!-- Search & Filter Container -->
-    <div class="search-filter-container">
+    <div class="search-filter-add-container">
       <div class="search-bar">
         <i class="fa-solid fa-magnifying-glass"></i>
         <input type="text" id="searchInput" placeholder="Search products...">
@@ -16,6 +16,10 @@
           <option value="out-stock">Out of Stock</option>
         </select>
       </div>
+
+      <!-- Then the Add Product button -->
+      <button class="btn-add-product">Add Product</button>
+
     </div>
 
   <table class="collapsible-table">
@@ -173,17 +177,13 @@
       </tr>
     </tbody>
   </table>
-  
-<div class="table-controls">
-  <!-- Put pagination first -->
+
+  <!-- Pagination -->
   <div class="pagination">
     <button id="prevPage" disabled>« Prev</button>
     <span id="pageNumber">1</span>
     <button id="nextPage">Next »</button>
   </div>
-  <!-- Then the Add Product button -->
-  <button class="btn-add-product">Add Product</button>
-</div>
 
 
 <!-- Add Product Modal -->
@@ -277,6 +277,3 @@
     </form>
   </div>
 </div>
-
-
-<script src="products.js"></script>

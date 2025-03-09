@@ -1,221 +1,337 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const toggleButtons = document.querySelectorAll('.toggle-btn');
-  toggleButtons.forEach(btn => {
-    btn.addEventListener('click', function () {
-      this.classList.toggle('rotated');
-      const parentRow = this.closest('.parent-row');
-      const childRow = parentRow.nextElementSibling;
-      if (childRow && childRow.classList.contains('child-row')) {
-        childRow.style.display = (childRow.style.display === 'table-row') ? 'none' : 'table-row';
+// Define an initialization function for the attendance page
+function initAttendance() {
+  let currentPage = 1;
+  const rowsPerPage = 10;
+
+  // Ensure your <tbody> in attendance.html has id="attendanceTbody"
+  const attendanceTbody = document.getElementById("attendanceTbody");
+  const prevPageBtn = document.getElementById("prevPage");
+  const nextPageBtn = document.getElementById("nextPage");
+  const pageNumberSpan = document.getElementById("pageNumber");
+
+  // Filter & Search elements
+  const filterCriteria = document.getElementById("filterCriteria");
+  const searchInput = document.getElementById("searchInput");
+
+  // Modal elements for adding and editing attendance
+  const addAttendanceModal = document.getElementById("addAttendanceModal");
+  const btnAddAttendance = document.getElementById("btnAddAttendance");
+  const closeAddModal = document.getElementById("closeAddModal");
+  const addAttendanceForm = document.getElementById("addAttendanceForm");
+
+  const editAttendanceModal = document.getElementById("editAttendanceModal");
+  const closeEditModal = document.getElementById("closeEditModal");
+  const editAttendanceForm = document.getElementById("editAttendanceForm");
+  let editAttendanceIndex = null;
+
+  // Sample data (replace with actual data fetching logic)
+  let attendanceData = [
+    {
+      empID: "E001",
+      firstName: "Savannah",
+      middleName: "",
+      lastName: "Nguyen",
+      employeeStatus: "Active",
+      attendanceStatus: "Present",
+      date: "2025-03-10",
+      timeIn: "08:00",
+      timeOut: "17:00",
+      remarks: "On time",
+    },
+    {
+      empID: "E002",
+      firstName: "Michael",
+      middleName: "",
+      lastName: "Johnson",
+      employeeStatus: "Probationary",
+      attendanceStatus: "Leave of Absence",
+      date: "2025-03-10",
+      timeIn: "--:--",
+      timeOut: "--:--",
+      remarks: "Family emergency",
+    },
+    {
+      empID: "E003",
+      firstName: "Erin",
+      middleName: "",
+      lastName: "Stone",
+      employeeStatus: "Part-Time",
+      attendanceStatus: "Suspended",
+      date: "2025-03-10",
+      timeIn: "10:00",
+      timeOut: "18:00",
+      remarks: "Late multiple times",
+    },
+  ];
+
+  // Add Attendance Modal
+  if (btnAddAttendance) {
+    btnAddAttendance.addEventListener("click", () => {
+      addAttendanceModal.style.display = "block";
+    });
+  }
+
+  if (closeAddModal) {
+    closeAddModal.addEventListener("click", () => {
+      addAttendanceModal.style.display = "none";
+    });
+  }
+
+  // Edit Attendance Modal
+  if (closeEditModal) {
+    closeEditModal.addEventListener("click", () => {
+      editAttendanceModal.style.display = "none";
+    });
+  }
+
+  // --- Utility Functions ---
+  function computeHoursWorked(timeIn, timeOut) {
+    let [inH, inM] = timeIn.split(":").map(Number);
+    let [outH, outM] = timeOut.split(":").map(Number);
+    let start = inH * 60 + inM;
+    let end = outH * 60 + outM;
+    let diff = end - start;
+    if (diff < 0) diff += 24 * 60; // handle overnight shifts
+    return (diff / 60).toFixed(2);
+  }
+
+  function getEmployeeStatusColor(status) {
+    const colors = {
+      Active: "#2ecc71",
+      Probationary: "#3498db",
+      "Part-Time": "#9b59b6",
+      "Full-Time": "#1abc9c",
+      Terminated: "#e74c3c",
+      Resigned: "#95a5a6",
+      Retired: "#7f8c8d",
+    };
+    return colors[status] || "#cccccc";
+  }
+
+  function getAttendanceColor(status) {
+    const colors = {
+      Present: "#2cae74",
+      "Leave of Absence": "#c0392b",
+      Suspended: "#f39c12",
+      Furloughed: "#9b59b6",
+      "Medical Leave": "#3498db",
+      "Parental Leave": "#f1c40f",
+    };
+    return colors[status] || "#cccccc";
+  }
+
+  // --- Render the Attendance Table ---
+  function renderTable() {
+    const filtered = filterSearchData();
+    const totalRows = filtered.length;
+    const maxPage = Math.ceil(totalRows / rowsPerPage);
+    if (currentPage > maxPage && maxPage !== 0) {
+      currentPage = maxPage;
+    }
+    updatePagination();
+    const startIndex = (currentPage - 1) * rowsPerPage;
+    const endIndex = startIndex + rowsPerPage;
+    const pageData = filtered.slice(startIndex, endIndex);
+
+    attendanceTbody.innerHTML = "";
+
+    pageData.forEach((attendance, idx) => {
+      const parentRow = document.createElement("tr");
+      parentRow.classList.add("parent-row");
+      parentRow.innerHTML = `
+        <td class="toggle-cell">
+          <i class="fa-solid fa-chevron-right toggle-btn"></i>
+        </td>
+        <td>${attendance.empID}</td>
+        <td>${attendance.firstName} ${attendance.lastName}</td>
+        <td>
+          <span class="att-status" style="color: ${getAttendanceColor(attendance.attendanceStatus)};">
+            ${attendance.attendanceStatus}
+          </span>
+        </td>
+        <td>${attendance.date}</td>
+        <td>
+          <button class="edit-btn">
+            <i class="fa-solid fa-pen-to-square"></i>
+          </button>
+          <button class="delete-btn">
+            <i class="fa-solid fa-trash"></i>
+          </button>
+        </td>
+      `;
+
+      const childRow = document.createElement("tr");
+      childRow.classList.add("child-row");
+      childRow.innerHTML = `
+        <td colspan="6">
+          <div class="child-content">
+            <h3>Details</h3>
+            <table class="child-inner-table">
+              <thead>
+                <tr>
+                  <th>Employee Status</th>
+                  <th>Time In</th>
+                  <th>Time Out</th>
+                  <th>Hours Worked</th>
+                  <th>Remarks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="emp-status" style="background-color: ${getEmployeeStatusColor(attendance.employeeStatus)};">
+                      ${attendance.employeeStatus}
+                    </span>
+                  </td>
+                  <td>${attendance.timeIn}</td>
+                  <td>${attendance.timeOut}</td>
+                  <td>${computeHoursWorked(attendance.timeIn, attendance.timeOut)}</td>
+                  <td>${attendance.remarks}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </td>
+      `;
+
+      attendanceTbody.appendChild(parentRow);
+      attendanceTbody.appendChild(childRow);
+
+      // Toggle Child Row
+      const toggleBtn = parentRow.querySelector(".toggle-btn");
+      toggleBtn.addEventListener("click", () => {
+        toggleBtn.classList.toggle("rotated");
+        childRow.style.display = (childRow.style.display === "table-row") ? "none" : "table-row";
+      });
+
+      // Edit Attendance
+      const editBtn = parentRow.querySelector(".edit-btn");
+      editBtn.addEventListener("click", () => {
+        openEditModal(startIndex + idx);
+      });
+
+      // Delete Attendance
+      const deleteBtn = parentRow.querySelector(".delete-btn");
+      deleteBtn.addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete this attendance record?")) {
+          attendanceData.splice(startIndex + idx, 1);
+          renderTable();
+          updateSummaryBoxes();
+        }
+      });
+    });
+  }
+
+  // --- Filter & Search Function ---
+  function filterSearchData() {
+    const criteria = filterCriteria.value;
+    const searchVal = searchInput.value.toLowerCase().trim();
+    return attendanceData.filter(attendance => {
+      let textToSearch = "";
+      switch (criteria) {
+        case "all":
+          textToSearch = attendance.empID + attendance.firstName + attendance.lastName + attendance.employeeStatus + attendance.attendanceStatus;
+          break;
+        case "attendance":
+          textToSearch = attendance.attendanceStatus;
+          break;
+        case "empstatus":
+          textToSearch = attendance.employeeStatus;
+          break;
+        case "name":
+          textToSearch = attendance.firstName + " " + attendance.lastName;
+          break;
+        case "hours":
+          textToSearch = computeHoursWorked(attendance.timeIn, attendance.timeOut).toString();
+          break;
+        default:
+          textToSearch = attendance.empID + attendance.firstName + attendance.lastName + attendance.employeeStatus + attendance.attendanceStatus;
+      }
+      return textToSearch.toLowerCase().includes(searchVal);
+    });
+  }
+
+  // --- Update Summary Boxes ---
+  function updateSummaryBoxes() {
+    let counts = {
+      Present: 0,
+      Absent: 0,
+      Suspended: 0,
+      Furloughed: 0,
+      "Medical Leave": 0,
+      "Parental Leave": 0,
+    };
+    attendanceData.forEach(attendance => {
+      if (counts.hasOwnProperty(attendance.attendanceStatus)) {
+        counts[attendance.attendanceStatus]++;
       }
     });
-  });
+    document.getElementById("presentCount").textContent = counts["Present"];
+    document.getElementById("absentCount").textContent = counts["Absent"];
+    document.getElementById("otherCount").textContent =
+      counts["Suspended"] + counts["Furloughed"] + counts["Medical Leave"] + counts["Parental Leave"];
+    document.getElementById("totalEmployees").textContent = attendanceData.length;
+  }
 
-    let currentPage = 1;
-    const itemsPerPage = 10;
-  
-    // ======= Utility Functions =======
-    function computeHoursWorked(timeIn, timeOut) {
-      let [inH, inM] = timeIn.split(":").map(Number);
-      let [outH, outM] = timeOut.split(":").map(Number);
-      let start = inH * 60 + inM;
-      let end = outH * 60 + outM;
-      let diff = end - start;
-      if (diff < 0) diff += 24 * 60; // handle overnight shifts
-      return (diff / 60).toFixed(2);
-    }
-  
-    function getEmployeeStatusColor(status) {
-      const colors = {
-        Active: "#2ecc71",
-        Probationary: "#3498db",
-        "Part-Time": "#9b59b6",
-        "Full-Time": "#1abc9c",
-        Terminated: "#e74c3c",
-        Resigned: "#95a5a6",
-        Retired: "#7f8c8d",
-      };
-      return colors[status] || "#cccccc";
-    }
-  
-    function getAttendanceColor(status) {
-      const colors = {
-        Present: "#2cae74",
-        "Leave of Absence": "#c0392b",
-        Suspended: "#f39c12",
-        Furloughed: "#9b59b6",
-        "Medical Leave": "#3498db",
-        "Parental Leave": "#f1c40f",
-      };
-      return colors[status] || "#cccccc";
-    }
-  
-    // ======= Rendering Functions =======
-    function renderTable() {
-      const filterCriteria = document.getElementById("filterCriteria").value;
-      const searchText = document.getElementById("searchInput").value.trim().toLowerCase();
-  
-      // Filter data based on criteria
-      let filteredData = attendanceData.filter((rec) => {
-        const fullName = (
-          rec.firstName +
-          " " +
-          (rec.middleName ? rec.middleName + " " : "") +
-          rec.lastName
-        ).toLowerCase();
-        const hoursWorked = computeHoursWorked(rec.timeIn, rec.timeOut);
-        if (filterCriteria === "all") {
-          return (
-            rec.empID.toLowerCase().includes(searchText) ||
-            fullName.includes(searchText) ||
-            rec.employeeStatus.toLowerCase().includes(searchText) ||
-            rec.attendanceStatus.toLowerCase().includes(searchText) ||
-            hoursWorked.toString().includes(searchText)
-          );
-        } else if (filterCriteria === "attendance") {
-          return rec.attendanceStatus.toLowerCase().includes(searchText);
-        } else if (filterCriteria === "empstatus") {
-          return rec.employeeStatus.toLowerCase().includes(searchText);
-        } else if (filterCriteria === "name") {
-          return fullName.includes(searchText);
-        } else if (filterCriteria === "hours") {
-          return hoursWorked.toString().includes(searchText);
-        }
-        return true;
-      });
-  
-      // Pagination
-      const totalPages = Math.ceil(filteredData.length / itemsPerPage) || 1;
-      if (currentPage > totalPages) currentPage = totalPages;
-      const startIndex = (currentPage - 1) * itemsPerPage;
-      const paginatedData = filteredData.slice(startIndex, startIndex + itemsPerPage);
-  
-      // Render table rows
-      const tbody = document.getElementById("attendanceTbody");
-      tbody.innerHTML = "";
-      paginatedData.forEach((rec) => {
-        const fullName =
-          rec.firstName + (rec.middleName ? " " + rec.middleName : "") + " " + rec.lastName;
-        const hoursWorked = computeHoursWorked(rec.timeIn, rec.timeOut);
-        const row = document.createElement("tr");
-        row.innerHTML = `
-          <td>${rec.empID}</td>
-          <td>${fullName}</td>
-          <td><span class="emp-status" style="background-color:${getEmployeeStatusColor(
-            rec.employeeStatus
-          )};">${rec.employeeStatus}</span></td>
-          <td><span class="att-status" style="background-color:${getAttendanceColor(
-            rec.attendanceStatus
-          )};">${rec.attendanceStatus}</span></td>
-          <td>${rec.timeIn}</td>
-          <td>${rec.timeOut}</td>
-          <td>${hoursWorked}</td>
-          <td>${rec.remarks || ""}</td>
-          <td>
-            <button class="edit-btn" data-index="${attendanceData.indexOf(rec)}">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-            <button class="delete-btn" data-index="${attendanceData.indexOf(rec)}">
-              <i class="fa-solid fa-trash"></i>
-            </button>
-          </td>
-        `;
-        tbody.appendChild(row);
-      });
-  
-      // Update pagination controls
-      document.getElementById("pageNumber").textContent = currentPage;
-      document.getElementById("prevPage").disabled = currentPage === 1;
-      document.getElementById("nextPage").disabled = currentPage === totalPages;
-  
-      // Attach edit and delete events
-      document.querySelectorAll(".edit-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-          const idx = this.getAttribute("data-index");
-          openEditModal(idx);
-        });
-      });
-  
-      document.querySelectorAll(".delete-btn").forEach((btn) => {
-        btn.addEventListener("click", function () {
-          const idx = this.getAttribute("data-index");
-          if (confirm("Are you sure you want to delete this attendance record?")) {
-            attendanceData.splice(idx, 1);
-            refreshSystem();
-          }
-        });
-      });
-    }
-  
-    function updateSummaryBoxes() {
-      let counts = {
-        Present: 0,
-        "Absent": 0,
-        Suspended: 0,
-        Furloughed: 0,
-        "Medical Leave": 0,
-        "Parental Leave": 0,
-      };
-      attendanceData.forEach((rec) => {
-        if (counts.hasOwnProperty(rec.attendanceStatus)) {
-          counts[rec.attendanceStatus]++;
-        }
-      });
-      document.getElementById("presentCount").textContent = counts["Present"];
-      document.getElementById("absentCount").textContent = counts["Absent"];
-      document.getElementById("otherCount").textContent =
-        counts["Suspended"] +
-        counts["Furloughed"] +
-        counts["Medical Leave"] +
-        counts["Parental Leave"];
-      // Total employees equals total records
-      document.getElementById("totalEmployees").textContent = attendanceData.length;
-    }
-  
-    function refreshSystem() {
-      renderTable();
-      updateSummaryBoxes();
-    }
-  
-    // ======= Event Listeners for Search, Filter & Pagination =======
-    document.getElementById("searchInput").addEventListener("input", () => {
-      currentPage = 1;
-      renderTable();
-    });
-  
-    document.getElementById("filterCriteria").addEventListener("change", () => {
-      currentPage = 1;
-      renderTable();
-    });
-  
-    document.getElementById("prevPage").addEventListener("click", () => {
+  // --- Pagination Logic ---
+  function updatePagination() {
+    const totalRows = filterSearchData().length;
+    const maxPage = Math.ceil(totalRows / rowsPerPage);
+    pageNumberSpan.textContent = currentPage;
+    prevPageBtn.disabled = currentPage <= 1;
+    nextPageBtn.disabled = currentPage >= maxPage;
+  }
+
+  if (prevPageBtn) {
+    prevPageBtn.addEventListener("click", () => {
       if (currentPage > 1) {
         currentPage--;
         renderTable();
       }
     });
-  
-    document.getElementById("nextPage").addEventListener("click", () => {
-      currentPage++;
-      renderTable();
+  }
+  if (nextPageBtn) {
+    nextPageBtn.addEventListener("click", () => {
+      const totalRows = filterSearchData().length;
+      const maxPage = Math.ceil(totalRows / rowsPerPage);
+      if (currentPage < maxPage) {
+        currentPage++;
+        renderTable();
+      }
     });
-  
-    // ======= Modal Handling: Add Attendance =======
-    const addModal = document.getElementById("addAttendanceModal");
-    const btnAddAttendance = document.getElementById("btnAddAttendance");
-    const closeAddModal = document.getElementById("closeAddModal");
-  
-    btnAddAttendance.addEventListener("click", () => {
-      addModal.style.display = "block";
-    });
-  
-    closeAddModal.addEventListener("click", () => {
-      addModal.style.display = "none";
-    });
-  
-    document.getElementById("addAttendanceForm").addEventListener("submit", function (e) {
+  }
+
+  filterCriteria.addEventListener("change", () => {
+    currentPage = 1;
+    renderTable();
+  });
+  searchInput.addEventListener("input", () => {
+    currentPage = 1;
+    renderTable();
+  });
+
+  // --- Modal Functions ---
+  function openEditModal(index) {
+    editAttendanceIndex = index;
+    const attendance = attendanceData[index];
+    document.getElementById("editEmpID").value = attendance.empID;
+    document.getElementById("editEmpFirstName").value = attendance.firstName;
+    document.getElementById("editEmpMiddleName").value = attendance.middleName;
+    document.getElementById("editEmpLastName").value = attendance.lastName;
+    document.getElementById("editEmpStatus").value = attendance.employeeStatus;
+    document.getElementById("editAttendanceStatus").value = attendance.attendanceStatus;
+    document.getElementById("editDate").value = attendance.date;
+    document.getElementById("editTimeIn").value = attendance.timeIn;
+    document.getElementById("editTimeOut").value = attendance.timeOut;
+    document.getElementById("editRemarks").value = attendance.remarks;
+    editAttendanceModal.style.display = "block";
+  }
+
+  // --- Form Submission Handlers ---
+  if (addAttendanceForm) {
+    addAttendanceForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const newRecord = {
+      const newAttendance = {
         empID: document.getElementById("addEmpID").value.trim(),
         firstName: document.getElementById("addEmpFirstName").value.trim(),
         middleName: document.getElementById("addEmpMiddleName").value.trim(),
@@ -227,24 +343,19 @@ document.addEventListener("DOMContentLoaded", function () {
         timeOut: document.getElementById("addTimeOut").value,
         remarks: document.getElementById("addRemarks").value.trim(),
       };
-      attendanceData.push(newRecord);
-      this.reset();
-      addModal.style.display = "none";
-      refreshSystem();
+      attendanceData.push(newAttendance);
+      addAttendanceModal.style.display = "none";
+      addAttendanceForm.reset();
+      renderTable();
+      updateSummaryBoxes();
     });
-  
-    // ======= Modal Handling: Edit Attendance =======
-    const editModal = document.getElementById("editAttendanceModal");
-    const closeEditModal = document.getElementById("closeEditModal");
-  
-    closeEditModal.addEventListener("click", () => {
-      editModal.style.display = "none";
-    });
-  
-    document.getElementById("editAttendanceForm").addEventListener("submit", function (e) {
+  }
+
+  if (editAttendanceForm) {
+    editAttendanceForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      const idx = document.getElementById("editRowIndex").value;
-      attendanceData[idx] = {
+      if (editAttendanceIndex === null) return;
+      attendanceData[editAttendanceIndex] = {
         empID: document.getElementById("editEmpID").value.trim(),
         firstName: document.getElementById("editEmpFirstName").value.trim(),
         middleName: document.getElementById("editEmpMiddleName").value.trim(),
@@ -256,28 +367,17 @@ document.addEventListener("DOMContentLoaded", function () {
         timeOut: document.getElementById("editTimeOut").value,
         remarks: document.getElementById("editRemarks").value.trim(),
       };
-      this.reset();
-      editModal.style.display = "none";
-      refreshSystem();
+      editAttendanceModal.style.display = "none";
+      editAttendanceForm.reset();
+      renderTable();
+      updateSummaryBoxes();
     });
-  
-    function openEditModal(index) {
-      const record = attendanceData[index];
-      if (!record) return;
-      document.getElementById("editRowIndex").value = index;
-      document.getElementById("editEmpID").value = record.empID;
-      document.getElementById("editEmpFirstName").value = record.firstName;
-      document.getElementById("editEmpMiddleName").value = record.middleName;
-      document.getElementById("editEmpLastName").value = record.lastName;
-      document.getElementById("editEmpStatus").value = record.employeeStatus;
-      document.getElementById("editAttendanceStatus").value = record.attendanceStatus;
-      document.getElementById("editDate").value = record.date;
-      document.getElementById("editTimeIn").value = record.timeIn;
-      document.getElementById("editTimeOut").value = record.timeOut;
-      document.getElementById("editRemarks").value = record.remarks;
-      editModal.style.display = "block";
-    }
-  
-    // ======= Initial Render =======
-    refreshSystem();
-  });
+  }
+
+  // --- Initial Render ---
+  renderTable();
+  updateSummaryBoxes();
+}
+
+// Expose the initialization function so it can be called externally
+window.initAttendance = initAttendance;

@@ -411,24 +411,11 @@ body.light-mode #saveEditProductBtn:hover {
   border-radius: 4px;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-left: auto;
 }
 
 .btn-add-product:hover {
   background-color: #900c06;
-}
-
-/* Controls Container for Add Button and Pagination */
-.table-controls {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 20px;
-  padding: 0 10px;
-}
-
-.table-controls .btn-add-product {
-  margin-left: auto; /* pushes the button to the far right */
-  
 }
 
 .btn-add-product {
@@ -496,8 +483,8 @@ body.light-mode .btn-add-product {
   color: #fff;
 }
 
-/* Search & Filter Container */
-.search-filter-container {
+/* Search, Filter, and Add Product Container */
+.search-filter-add-container {
   display: flex;
   align-items: center;
   gap: 20px;
@@ -532,7 +519,6 @@ body.light-mode .btn-add-product {
 
 .filter-dropdown {
   flex: 0 0 200px;
-  margin-left: 20px;
 }
 
 .filter-dropdown select {

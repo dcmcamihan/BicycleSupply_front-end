@@ -6,16 +6,9 @@
   <title>Brands &amp; Categories | Jolens Bicycle Supply</title>
 
   <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-  />
-  <!-- Page-specific CSS -->
-  <!-- <link rel="stylesheet" href="brands-categories.css" /> -->
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&display=swap" rel="stylesheet" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 </head>
 <body>
   <div class="bc-container">
@@ -30,30 +23,29 @@
       <div class="brand-list">
         <!-- Example Brand Card -->
         <div class="brand-card">
-            <div class="brand-avatar">
-              <div class="default-avatar">SH</div>
-            </div>
-            <h3>Shimano</h3>
-            <p>Origin: Japan</p>
-            <div class="card-actions">
-              <i class="fa-solid fa-pen-to-square edit-brand"></i>
-              <i class="fa-solid fa-trash delete-brand"></i>
-            </div>
+          <div class="brand-avatar">
+            <div class="default-avatar">SH</div>
           </div>
-          
-          <div class="brand-card">
-            <div class="brand-avatar">
-              <div class="default-avatar">T</div>
-            </div>
-            <h3>Trek</h3>
-            <p>Origin: USA</p>
-            <div class="card-actions">
-              <i class="fa-solid fa-pen-to-square edit-brand"></i>
-              <i class="fa-solid fa-trash delete-brand"></i>
-            </div>
+          <h3>Shimano</h3>
+          <p>Origin: Japan</p>
+          <div class="card-actions">
+            <i class="fa-solid fa-pen-to-square edit-brand"></i>
+            <i class="fa-solid fa-trash delete-brand"></i>
           </div>
-          
+        </div>
+        <div class="brand-card">
+          <div class="brand-avatar">
+            <div class="default-avatar">T</div>
+          </div>
+          <h3>Trek</h3>
+          <p>Origin: USA</p>
+          <div class="card-actions">
+            <i class="fa-solid fa-pen-to-square edit-brand"></i>
+            <i class="fa-solid fa-trash delete-brand"></i>
+          </div>
+        </div>
       </div>
+      <!-- Add Brand Button -->
       <button class="btn-add" id="addBrandBtn">Add Brand</button>
     </div>
     <!-- Categories Tab -->
@@ -67,7 +59,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Example Row -->
+          <!-- Example Category Row -->
           <tr data-cat-code="BIKECOMP">
             <td>BIKECOMP</td>
             <td>Bike Components</td>
@@ -84,9 +76,9 @@
               <i class="fa-solid fa-trash delete-category"></i>
             </td>
           </tr>
-          <!-- More rows as needed -->
         </tbody>
       </table>
+      <!-- Add Category Button -->
       <button class="btn-add" id="addCategoryBtn">Add Category</button>
     </div>
   </div>
@@ -115,8 +107,5 @@
       </form>
     </div>
   </div>
-
-  <!-- JavaScript -->
-  <script src="brands-categories.js"></script>
 </body>
 </html>

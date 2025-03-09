@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600&display=swap" rel="stylesheet" />
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
-  <!-- Returns & Exchange CSS -->
+  <!-- Return/Exchange CSS -->
   <link rel="stylesheet" href="return-exchange.css" />
 </head>
 <body>
@@ -31,7 +31,7 @@
           <option value="status">Status</option>
         </select>
       </div>
-      <!-- Changed button text and ID -->
+      <!-- Single Add button placed above the table -->
       <button class="btn-add-return" id="btnAddReturn">
         <i class="fa-solid fa-plus"></i> Add Return/Exchange
       </button>
@@ -52,155 +52,27 @@
           <th>Action</th>
         </tr>
       </thead>
-      <tbody>
-        <!-- Example Parent Row 1 -->
-        <tr class="parent-row">
-          <td class="toggle-cell">
-            <i class="fa-solid fa-chevron-right toggle-btn"></i>
-          </td>
-          <td>R001</td>
-          <td>2025-03-15</td>
-          <td>John Doe</td>
-          <td>Return</td>
-          <td>Defective</td>
-          <td>$150</td>
-          <td>Pending</td>
-          <td>
-            <i class="fa-solid fa-pen-to-square edit-transaction"></i>
-            <i class="fa-solid fa-trash delete-transaction"></i>
-          </td>
-        </tr>
-        <!-- Child rows for R001 -->
-        <tr class="child-row">
-          <td colspan="9">
-            <div class="child-content">
-              <h3>Item Details</h3>
-              <table class="detail-table">
-                <thead>
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Condition</th>
-                    <th>Refund Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Brake Pads</td>
-                    <td>2</td>
-                    <td>Unused</td>
-                    <td>$150</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-        <!-- Example Parent Row 2 -->
-        <tr class="parent-row">
-          <td class="toggle-cell">
-            <i class="fa-solid fa-chevron-right toggle-btn"></i>
-          </td>
-          <td>R002</td>
-          <td>2025-03-16</td>
-          <td>Mary Smith</td>
-          <td>Exchange</td>
-          <td>Wrong Size</td>
-          <td>$300</td>
-          <td>Approved</td>
-          <td>
-            <i class="fa-solid fa-pen-to-square edit-transaction"></i>
-            <i class="fa-solid fa-trash delete-transaction"></i>
-          </td>
-        </tr>
-        <!-- Child rows for R002 -->
-        <tr class="child-row">
-          <td colspan="9">
-            <div class="child-content">
-              <h3>Item Details</h3>
-              <table class="detail-table">
-                <thead>
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Condition</th>
-                    <th>Exchange Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Handlebar</td>
-                    <td>1</td>
-                    <td>Used</td>
-                    <td>$300</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
-        <!-- Example Parent Row 3 -->
-        <tr class="parent-row">
-          <td class="toggle-cell">
-            <i class="fa-solid fa-chevron-right toggle-btn"></i>
-          </td>
-          <td>R003</td>
-          <td>2025-03-17</td>
-          <td>Robert Lee</td>
-          <td>Return</td>
-          <td>Changed Mind</td>
-          <td>$50</td>
-          <td>Rejected</td>
-          <td>
-            <i class="fa-solid fa-pen-to-square edit-transaction"></i>
-            <i class="fa-solid fa-trash delete-transaction"></i>
-          </td>
-        </tr>
-        <tr class="child-row">
-          <td colspan="9">
-            <div class="child-content">
-              <h3>Item Details</h3>
-              <table class="detail-table">
-                <thead>
-                  <tr>
-                    <th>Product Name</th>
-                    <th>Quantity</th>
-                    <th>Condition</th>
-                    <th>Refund Value</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Chain</td>
-                    <td>1</td>
-                    <td>New</td>
-                    <td>$50</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </td>
-        </tr>
+      <tbody id="returnExchangeTbody">
+        <!-- Rows will be rendered dynamically -->
       </tbody>
     </table>
     
-    <!-- Controls Container: Pagination (left) and Add Return/Exchange Button (right) -->
+    <!-- Pagination Controls -->
     <div class="table-controls">
       <div class="pagination">
         <button id="prevPage" disabled>« Prev</button>
         <span id="pageNumber">1</span>
         <button id="nextPage">Next »</button>
       </div>
-      <button class="btn-add-return" id="btnAddReturn">Add Return/Exchange</button>
     </div>
   </div>
   
-  <!-- Add Return/Exchange Modal -->
-  <div class="modal" id="addReturnModal">
+  <!-- Add/Edit Return/Exchange Modal -->
+  <div class="modal" id="returnModal">
     <div class="modal-content">
-      <span class="close-modal" id="closeAddReturnModal">&times;</span>
-      <h2>Add Return/Exchange</h2>
-      <form id="addReturnForm">
+      <span class="close-modal" id="closeReturnModal">&times;</span>
+      <h2 id="returnModalTitle">Add Return/Exchange</h2>
+      <form id="returnForm">
         <div class="form-group">
           <label for="returnCustomer">Customer</label>
           <input type="text" id="returnCustomer" placeholder="Customer Name" required />
@@ -210,83 +82,31 @@
           <input type="date" id="returnDate" required />
         </div>
         <div class="form-group">
-          <label for="returnManager">Cashier/Manager</label>
-          <input type="text" id="returnManager" placeholder="Name" required />
+          <label for="returnType">Type</label>
+          <select id="returnType" required>
+            <option value="Return">Return</option>
+            <option value="Exchange">Exchange</option>
+          </select>
         </div>
         <div class="form-group">
-          <label for="returnPayment">Payment Method</label>
-          <input type="text" id="returnPayment" placeholder="e.g. Cash, Card" required />
+          <label for="returnReason">Reason</label>
+          <input type="text" id="returnReason" placeholder="Reason for return/exchange" required />
         </div>
         <div class="form-group">
           <label for="returnTotal">Total Value</label>
           <input type="number" id="returnTotal" placeholder="Total" required />
         </div>
-        <button type="submit" class="btn-submit">Add Return/Exchange</button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Edit Return/Exchange Modal -->
-  <div class="modal" id="editReturnModal">
-    <div class="modal-content">
-      <span class="close-modal" id="closeEditReturnModal">&times;</span>
-      <h2>Edit Return/Exchange</h2>
-      <form id="editReturnForm">
-        <input type="hidden" id="editReturnIndex" />
-        <div class="form-group">
-          <label for="editReturnID">Transaction ID</label>
-          <input type="text" id="editReturnID" disabled />
-        </div>
-        <div class="form-group">
-          <label for="editReturnCustomer">Customer</label>
-          <input type="text" id="editReturnCustomer" required />
-        </div>
-        <div class="form-group">
-          <label for="editReturnDate">Date</label>
-          <input type="date" id="editReturnDate" required />
-        </div>
-        <div class="form-group">
-          <label for="editReturnManager">Cashier/Manager</label>
-          <input type="text" id="editReturnManager" required />
-        </div>
-        <div class="form-group">
-          <label for="editReturnPayment">Payment Method</label>
-          <input type="text" id="editReturnPayment" required />
-        </div>
-        <div class="form-group">
-          <label for="editReturnTotal">Total Value</label>
-          <input type="number" id="editReturnTotal" required />
-        </div>
-        <button type="submit" class="btn-submit">Save Changes</button>
-      </form>
-    </div>
-  </div>
-  
-  <!-- Edit Return/Exchange Detail Modal -->
-  <div class="modal" id="editReturnDetailModal">
-    <div class="modal-content">
-      <span class="close-modal" id="closeEditReturnDetailModal">&times;</span>
-      <h2>Edit Return/Exchange Detail</h2>
-      <form id="editReturnDetailForm">
-        <input type="hidden" id="editReturnDetailIndex" />
-        <div class="form-group">
-          <label for="editProductName">Product Name</label>
-          <input type="text" id="editProductName" required />
-        </div>
-        <div class="form-group">
-          <label for="editQuantitySold">Quantity Sold</label>
-          <input type="number" id="editQuantitySold" required />
-        </div>
-        <div class="form-group">
-          <label for="editPricePerUnit">Price Per Unit</label>
-          <input type="number" id="editPricePerUnit" required />
-        </div>
-        <button type="submit" class="btn-submit">Save Changes</button>
+        <button type="submit" class="btn-submit">Save</button>
       </form>
     </div>
   </div>
   
   <!-- Return/Exchange JS -->
   <script src="return-exhange.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(){
+      initReturnExchange();
+    });
+  </script>
 </body>
 </html>
