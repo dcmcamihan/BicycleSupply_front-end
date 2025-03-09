@@ -426,6 +426,11 @@ body.light-mode #saveEditProductBtn:hover {
   padding: 0 10px;
 }
 
+.table-controls .btn-add-product {
+  margin-left: auto; /* pushes the button to the far right */
+  
+}
+
 .btn-add-product {
   background-color: #ab0d07;
   color: #fff;
