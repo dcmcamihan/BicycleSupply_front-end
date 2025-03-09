@@ -96,9 +96,6 @@
         <span id="pageNumber">1</span>
         <button id="nextPage">Next »</button>
       </div>
-      <button class="btn-add-supplier-contact" id="btnAddSupplierContactBottom">
-        <i class="fa-solid fa-plus"></i> Add Contact
-      </button>
     </div>
   </div>
   
@@ -180,34 +177,5 @@
       </form>
     </div>
   </div>
-  
-  <!-- Minimal JS for modal handling (adjust as needed) -->
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const btnAddSupplierContact = document.getElementById("btnAddSupplierContact");
-      const btnAddSupplierContactBottom = document.getElementById("btnAddSupplierContactBottom");
-      const addModal = document.getElementById("addSupplierContactModal");
-      const closeAddModal = document.getElementById("closeAddSupplierContactModal");
-      
-      // Open Add Modal
-      btnAddSupplierContact.addEventListener("click", () => {
-        addModal.style.display = "block";
-      });
-      btnAddSupplierContactBottom.addEventListener("click", () => {
-        addModal.style.display = "block";
-      });
-      // Close Modal
-      closeAddModal.addEventListener("click", () => {
-        addModal.style.display = "none";
-      });
-      window.addEventListener("click", (e) => {
-        if (e.target === addModal) {
-          addModal.style.display = "none";
-        }
-      });
-      
-      // (Optional) Pagination & search functionality can be added here
-    });
-  </script>
 </body>
 </html>

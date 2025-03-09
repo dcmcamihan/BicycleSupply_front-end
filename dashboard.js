@@ -84,6 +84,12 @@ function loadPage(pageUrl) {
       if (pageUrl.includes('customer-contact.html') && typeof initCustomerContact === 'function') {
         initCustomerContact();
       }
+      if (pageUrl.includes('supplier-list.html') && typeof initSupplierList === 'function') {
+        initSupplierList();
+      }
+      if (pageUrl.includes('supplier-contact.html') && typeof initSupplierContact === 'function') {
+        initSupplierContact();
+      }
     })
     .catch(err => console.error("Failed to load page:", err));
 }
