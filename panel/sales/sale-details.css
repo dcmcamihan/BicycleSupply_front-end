@@ -152,6 +152,10 @@
     background-color: #333;
   }
 
+  .child-content .sale-detail-table tr:nth-child(even) {
+    background-color: #2a2a2a; 
+  }
+
   body.light-mode .child-content .sale-detail-table tr:nth-child(even) {
     background-color: #f7f7f7; 
   }
