@@ -164,6 +164,34 @@
   
   .summary-box h4 { font-size: 1rem; margin-bottom: 8px; color: #ab0d07; }
   .summary-box p { font-size: 1.4rem; font-weight: bold; }
+
+  /* Color bands for each box */
+  .total-box {
+    border-left: 5px solid #ccc;       
+  }
+  .present-box {
+    border-left: 5px solid #2cae74;   
+  }
+  .absent-box {
+    border-left: 5px solid #c0392b;    
+  }
+  .other-box {
+    border-left: 5px solid #f39c12;    
+  }
+
+  /* Light Mode Overrides */
+  body.light-mode .summary-box.total-box {
+    border-left: 5px solid #aaa;
+  }
+  body.light-mode .summary-box.present-box {
+    border-left: 5px solid #27ae60;
+  }
+  body.light-mode .summary-box.absent-box {
+    border-left: 5px solid #e74c3c;
+  }
+  body.light-mode .summary-box.other-box {
+    border-left: 5px solid #f39c12;
+  }
   
   /* Modals */
   .modal {

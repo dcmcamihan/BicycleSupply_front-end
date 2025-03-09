@@ -155,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateSummaryBoxes() {
       let counts = {
         Present: 0,
-        "Leave of Absence": 0,
+        "Absent": 0,
         Suspended: 0,
         Furloughed: 0,
         "Medical Leave": 0,
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       });
       document.getElementById("presentCount").textContent = counts["Present"];
-      document.getElementById("onLeaveCount").textContent = counts["Leave of Absence"];
+      document.getElementById("absentCount").textContent = counts["Absent"];
       document.getElementById("otherCount").textContent =
         counts["Suspended"] +
         counts["Furloughed"] +
