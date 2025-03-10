@@ -335,4 +335,8 @@
   body.light-mode .btn-add-supply:hover {
     background-color: #900c06;
   }
+
+  body.light-mode .child-content .detail-table tr:nth-child(even) {
+    background-color: #f7f7f7;
+  }
   
