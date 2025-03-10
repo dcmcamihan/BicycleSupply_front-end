@@ -90,6 +90,12 @@ function loadPage(pageUrl) {
       if (pageUrl.includes('supplier-contact.html') && typeof initSupplierContact === 'function') {
         initSupplierContact();
       }
+      if (pageUrl.includes('sales-overview.html') && typeof initSalesOverview === 'function') {
+        initSalesOverview();
+      }
+      if (pageUrl.includes('supply-orders.html') && typeof initSupplyOrders === 'function') {
+        initSupplyOrders();
+      }
     })
     .catch(err => console.error("Failed to load page:", err));
 }
